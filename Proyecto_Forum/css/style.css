@@ -1,0 +1,99 @@
+/* FUENTES DE TEXTO */
+
+/* Fuente creada por Miquel Costa carácter a carácter basada en el juego Super Monaco GP de Sega Master System */
+@font-face {font-family: "SMGP"; src: url(../fuentes/SuperMonacoGP.ttf);}
+@font-face {font-family: "Neo7"; src: url(../fuentes/neon_pixel-7.ttf);}
+@font-face {font-family: "SSB"; src: url(../fuentes/StripedSansBlack.ttf);}
+
+
+
+/* CENTRAR PLACEHOLDER */
+
+::-webkit-input-placeholder {text-align: center;}
+:-moz-placeholder {text-align: center;} /* Firefox anteriores a v18 */
+::-moz-placeholder {text-align: center;} /* Firefox posteriores a v18 */
+:-ms-input-placeholder {text-align: center;}
+
+
+
+/* GENERAL */
+* {padding: 0px; margin: 0px;}
+
+html {
+    background-image: url('../images/web/NeoBack.jpg'); /* Fondo de pantalla */
+    background-size: cover; /* Ajuste */
+    background-attachment: fixed;
+    position: relative; /* Ajuste de pagina */
+}
+
+body {
+    background-color: rgba(0,0,0,0); /* Color de fondo del body */
+    color: #000; /* Color de texto */
+    font-family: "SMGP"; /* Fuente personalizada */
+    font-size: 1.2em; /* Tamaño de fuente */
+    line-height: 1; /* Separación entre lineas */
+    margin-bottom: 60px; /* Margen extra para el final de página y que footer no tape la parte inferior */
+}
+
+
+
+/* Color barras titulos */
+.bg-warning-custom{
+    background: linear-gradient(to right, rgba(255,193,7,1), rgba(255,193,7,0));
+}
+.bg-warning-custom-1{
+    background: linear-gradient(to right, rgba(255,193,7,1), rgba(255,193,7,0.17));
+}
+.bg-warning-custom-2{
+    background: linear-gradient(to right, rgba(255,193,7,0.16), rgba(255,193,7,0));
+}
+.bg-info-custom{
+    background: linear-gradient(to right, rgba(64,172,172,1), rgba(64,172,172,0));
+}
+.table-secondary-custom { 
+     background: linear-gradient(to right, rgba(216,217,219,1), rgba(216,217,219,0)); 
+}
+.table-secondary-custom-2 { 
+     background: linear-gradient(to right, rgba(150,150,150,1), rgba(150,150,150,0));
+}
+.table-secondary-custom-2 a { 
+    font-size: 1em; padding-top:0px;
+}
+
+.btn {padding-top:2px !important}
+
+a {outline: 0 !important; text-decoration: none !important;}
+
+
+/* TEMAS */
+
+/* avatar */
+.avatar {width: 100px; height: 100px; background-color: #FFF; border: 1px solid red}
+
+/* rango */
+.rango {width: 150px; height: 30px; background-color: #F00; border: 1px solid green;}
+
+/* borders */
+.RLT {border-top-left-radius: 0.25rem !important;}
+.RRT {border-top-right-radius: 0.25rem !important;}
+.RLB {border-bottom-left-radius: 0.25rem !important;}
+.RRB {border-bottom-right-radius: 0.25rem !important;}
+
+
+/* Botones links */
+.myweb {width: 32px; height: 26px; background-color: #FF0; border: 1px solid green;}
+.mensajeprivado {width: 32px; height: 26px; background-color: #0F0; border: 1px solid yellow;}
+
+
+
+
+
+
+
+
+
+
+/* PIE DE PÁGINA */
+
+/* Ajusta el tamaño y posición del FOOTER */
+.footer{position: fixed; bottom: 0; left: 0; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;} 
