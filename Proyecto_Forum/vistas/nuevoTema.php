@@ -7,8 +7,7 @@
     </head>
 
     <body class="container">
-       <?php include "header.php"; ?>
-        
+        <?php include "header.php"; ?>
         <main class="mt-3 col-12 row b-transluced text-dark p-0 text-left">
             <div class='rounded mb-2 col-12 bg-warning-custom'>
                     <h3 class="font-weight-bold">ATARI > GENERAL > NUEVO TEMA</h3>

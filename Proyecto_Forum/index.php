@@ -13,6 +13,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         $controller = new controlador_vistas();
         
         if($_GET['action'] == "indice") {$controller -> indice();}
+        elseif($_GET['action'] == "pantalla_login") {$controller -> pantalla_login();}
         elseif($_GET['action'] == "registrar") {$controller -> registrar();}
         
        
@@ -42,6 +43,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     	$controller = new controlador_usuario();
        
        if($_GET['action'] == "crear"){$controller -> crear();}
+       if($_GET['action'] == "login"){$controller -> login();}
     
     }
 } 

@@ -5,7 +5,6 @@
         <title>Retro Gaming Forum</title>
         <?php include "bootstrap.php"; ?>
     </head>
-
     <script>	
 		// CÓDIGO RECICLADO DEL ANTERIOR PROYECTO //
 		// Este código no puede ejecutarse externamente por llamadas a Bootstrap desde PHP //
@@ -19,7 +18,6 @@
 			setTimeout(function(){$("#aviso3").show()},100); // Se efectúa un retraso en la ejecución para darle tiempo a que se genere el HTML //
 			setTimeout(function(){$("#aviso3").hide();},5000); // A los 5 segundos desaparece el mensaje de información //
 		}
-		function mostrar2() {setTimeout(function(){$("#aviso2").show()},100);} // La misma función de antes pero para los errores generados por JavaScript //
 		
 		window.onload = function() { // Función que se ejecuta al cargar el HTML //
 			
@@ -141,7 +139,7 @@
 				<input class="col-4 col-sm-5 col-md-4 col-lg-3 col-xl-2 centext text-center"  type="text" size="12" /><br>
 				<input type="submit" value="Crear cuenta" class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 mt-5 btn btn-success" />
             </form>
-            <p id="aviso2" class="alert alert-danger borroso" role="alert">
+            <p id="aviso2" class="alert alert-danger" role="alert">
 				<?php // Código PHP que muestra diferentes errores según valor devuelto por controlador a la base de datos //
 					if (isset($_GET['error1'])) {
 						echo "<script>mostrar1();</script>"."La contraseña debe tener al menos 8 caracteres.";
@@ -166,11 +164,10 @@
 					}
 				?>
 			</p>
-			<p id="aviso3" class="alert alert-info borroso" role="alert">
+			<p id="aviso3" class="alert alert-info" role="alert">
 				<?php // Código PHP que muestra diferentes informaciones según valor devuelto por controlador a la base de datos //
 				
-				// No ha verificado aun su cuenta de usuario. Si no ha recibido un email de verificación pulse <a class='alert-link' href='index.php?controller=usuario&action=verificar'>AQUI</a> para verificarlo.
-					if (isset($_GET['info1'])) {
+				if (isset($_GET['info1'])) {
 						echo "<script>mostrar3();</script>"."Su cuenta ha sido creada correctamente, por favor, compruebe su correo para activar su cuenta de usuario.";
 					}
 				?>

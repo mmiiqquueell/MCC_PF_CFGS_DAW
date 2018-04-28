@@ -16,10 +16,28 @@ class controlador_vistas {
         require_once ("vistas/iniciar.php");
     }
     
+    
+    public function pantalla_login()
+    {
+    	require_once ("vistas/login.php");
+    }
+    
+    
     public function registrar()
     {
     	require_once ("vistas/registrar.php");
     }
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     public function indice()
@@ -32,6 +50,13 @@ class controlador_vistas {
             echo "¡ACCESS DENIED!";
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
     /**

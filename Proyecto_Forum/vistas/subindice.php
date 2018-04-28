@@ -9,7 +9,6 @@
     <body class="container p-0">
         
         <?php include "header.php"; ?>
-
         <main class="mt-3 col-12 b-transluced text-dark p-0 text-left">
             <div class='col-12 row p-0 pb-3 b-transluced text-center mx-auto'>
                 <div class='rounded-left col-7 border bg-white pb-1'>

@@ -60,26 +60,42 @@ class modelo_usuario{
     	if ($result -> num_rows > 0) {return true;}
     	else {return false;}
     }
-    
-    
-    
-    
-    
-    
-    
+        
     /**
-     * Función para hacer login, utiliza PREPARE STATEMENT para limpiar los campos introducidos.
+     * Comprueba el nivel del usuario.
+     */
+    public function verificar_nivel(){
+    	$consulta=$this->db->query("SELECT nivel FROM usuarios WHERE nombre = '{$this -> nombre}';");
+    	while($filas=$consulta->fetch_assoc()){$this->nivel=$filas;}
+    	return $this->nivel;
+    }
+        
+    /**
+     * Función para hacer login.
      */
     public function login(){
-        $salt = '$1$encriptat';
+    	$salt = '$6$rounds=5000$mcc91pfcfgs17daw$';
         $hashed_password = crypt($this -> password, $salt);
-        $stmt = $this->db->prepare("SELECT * FROM user WHERE USERNAME = ? AND PASSWORD = ?");
+        $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE nombre = ? AND password = ?");
         $stmt -> bind_param('ss', $this->nombre, $hashed_password);
         $stmt -> execute();
         $result = $stmt->get_result(); 
         if ($result -> num_rows > 0) {return true;}
         else {return false;}
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * Obtiene la dirección (residencia) del usuario para añadir a la cesta si se crea (funciona al hacer login pero no si finaliza una compra, no descubrí el motivo).
@@ -113,18 +129,6 @@ class modelo_usuario{
         return $this->email;
     }
     
-    
-    /**
-     * Comprueba si el email del usuario está verificado para loguearse.
-     */
-    public function validado(){   
-        $salt = '$1$encriptat';
-        $hashed_password = crypt($this -> password, $salt);
-        $sql = "SELECT * FROM user WHERE USERNAME = '{$this -> nombre}' AND PASSWORD = '$hashed_password' AND VERIFICADO != 0;";		
-        $resultado = $this -> db -> query($sql);
-		if ($resultado -> num_rows > 0) {return true;}
-        else {return false;}
-    }
       
     /**
      * Verifica el email (falsa verificación) tras registrarse y hacer login por primera vez.

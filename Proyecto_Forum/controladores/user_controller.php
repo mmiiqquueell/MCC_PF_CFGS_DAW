@@ -41,4 +41,32 @@ class controlador_usuario {
 			else {header("Location: index.php?controller=vistas&action=registrar&error10");}
 		}
 	}    
+	
+	
+	/**
+	 * 
+	 */
+	public function login(){
+		$nombre = $_POST['usuario'];
+		$password = $_POST['password'];
+		if(!isset($_SESSION['user'])){$_SESSION['user'] = $nombre;}
+		if(!isset($_SESSION['cont'])){$_SESSION['cont'] = $password;}
+		$userLogin = new modelo_usuario();
+		$userLogin -> setNombre($nombre);
+		$userLogin -> setPassword($password);
+		$nivelUsuario = $userLogin->verificar_nivel();
+		$_SESSION['nivel'] = $nivelUsuario['nivel'];
+		if($nivelUsuario['nivel'] === '10'){header("Location: index.php?controller=vistas&action=pantalla_login&error1");}
+		elseif($nivelUsuario['nivel'] === '0'){header("Location: index.php?controller=vistas&action=pantalla_login&error2");}
+		elseif($nivelUsuario['nivel'] === '1'){header("Location: index.php?controller=vistas&action=pantalla_login&error3");}
+		else{
+			$iniciarSesion = $userLogin->login();
+			if($iniciarSesion){header("Location: index.php");}
+			else{header("Location: index.php?controller=vistas&action=pantalla_login&error4");}
+		}
+		
+	}
+	
+	
+	
 }
