@@ -37,6 +37,10 @@ body {
 
 
 
+
+
+
+
 /* Color barras titulos */
 .bg-warning-custom{
     background: linear-gradient(to right, rgba(255,193,7,1), rgba(255,193,7,0));
@@ -97,3 +101,33 @@ a {outline: 0 !important; text-decoration: none !important;}
 
 /* Ajusta el tamaño y posición del FOOTER */
 .footer{position: fixed; bottom: 0; left: 0; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;} 
+
+
+
+
+
+
+/* EFECTO DE PANTALLA */
+
+/* Configuración para el botón que permite activar o desactivar el efecto CRT */
+.CRT { 
+    background-image: url("../images/web/pixelCRT.png");
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 32px; height: 35px;
+}
+
+/* Aplica una textura de CRT por toda la pantalla con transparencia para simular un efecto CRT */
+.filtro { 
+    background-image: url("../images/web/pixelCRT.png");
+    background-repeat: repeat;
+    opacity: 0.2;
+    background-size: 3px;
+    width: 100%; height: 100%;
+    z-index: 999999; /* Máximo nivel de Z-index para que se coloque sobre boostrap que se encuentra a un nivel index similar */
+    position: fixed;
+    left: 0; top: 0;
+    pointer-events:none; /* Desactiva el DIV haciendo que cualquier acción de teclado y ratón lo ignore por completo */
+    filter: brightness(1.7); /* Filtro que aumenta el brillo un 70% debido a que el CRT reduce el color considerablemente */
+}

@@ -8,67 +8,99 @@
 
     <body class="container">
        <?php include "header.php"; ?>
-        
-        <body class="container">
-		<div id="filtro" class="filtro"></div>
-        <div class="wrapper borroso">
 			<div class="col-12">
 				<ul class="col-12 nav nav-pills nav-justified mt-4">
 					<li class="col-2 nav-item">
-						<a class="nav-link active" data-toggle="pill" href="#avatar">Avatar</a>
+						<a class="nav-link active border rounded pt-1" data-toggle="pill" href="#avatar">Avatar Firma</a>
 					</li>
 					<li class="col-2 nav-item">
-						<a class="nav-link" data-toggle="pill" href="#info">Información Personal</a>
+						<a class="nav-link border rounded pt-1" data-toggle="pill" href="#info">Información Personal</a>
 					</li>
                     <li class="col-2 nav-item">
-						<a class="nav-link" data-toggle="pill" href="#config">Configuración</a>
+						<a class="nav-link border rounded pt-1" data-toggle="pill" href="#config">Configuración del foro</a>
 					</li>
 					<li class="col-2 nav-item">
-						<a class="nav-link" data-toggle="pill" href="#mencion">Menciones</a>
+						<a class="nav-link border rounded pt-1" data-toggle="pill" href="#mencion">Menciones realizadas</a>
 					</li>
                     <li class="col-2 nav-item">
-						<a class="nav-link" data-toggle="pill" href="#stats">Estadisticas</a>
+						<a class="nav-link border rounded pt-1" data-toggle="pill" href="#stats">Estadisticas personales</a>
 					</li>
 					<li class="col-2 nav-item">
-						<a class="nav-link" data-toggle="pill" href="#mp">Mensajes privados</a>
+						<a class="nav-link border rounded pt-1" data-toggle="pill" href="#mp">Mensajes privados</a>
 					</li>
 				</ul>
 			</div>
 			<div class="col-12 text-center">
-				<div class="tab-content"><hr>
-					<div class="tab-pane active container mt-5" id="avatar">
-						<form action="index.php?controller=usuario&action=login" method="post">
-							<input class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 centext text-center" name="nombre" type="text" placeholder="NOMBRE"/><br>
-							<input class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 centext text-center" name="password" type="password" placeholder="CONTRASEÑA" /><br><br>
-							<input type="submit" value="Iniciar sesion" class="mt-2 btn btn-success col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2" /><br>
-							<a href="index.php?controller=vistas&acction=home"><input type="button" value="cancelar" class="mt-5 small btn btn-warning col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2" /></a>
-							<br>
-						</form>
+					<div class="tab-content text-white">
+						<div class="table-dark p-2 rounded tab-pane active container mt-5" id="avatar">
+							<form class="">
+								<h1 class="bg-warning-custom rounded text-dark text-left pl-2 pb-1">AVATAR</h1>
+								<p>Elija un avatar personalizado: maximo 100x100px y un peso menor a 100 KB.</p>
+								<p>Avatar actual</p>
+								<div class="rounded avatar mx-auto mb-2">AVATAR</div>
+								<input class="col-12 btn bg-dark pb-0" type="file" name="pic" accept="image/*">
+
+								<h1 class="bg-warning-custom rounded text-dark text-left pl-2 pb-1 mt-4">FIRMA</h1>
+								<p>Escriba su firma personalizado: Máximo de 1000 caracteres.</p>
+								<textarea class="w-75 rounded m-auto"></textarea>
+								<div class='col-12 p-0 b-transluced mt-2 text-center'>
+									<input type="submit" class="col-12 text-white btn btn-primary" value="GUARDAR">
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane container mt-5" id="info">
+							<form class="">
+								<h1 class="">INFORMACION PERSONAL</h1>
+								<label>Biografia: Cuenta algo sobre ti</label>
+								<label>Edad: Fecha de nacimiento</label>
+								<label>Mostrar edad</label>
+								<label>Sexo</label>
+								<label>Página web</label>
+								<label>ID de Nintendo</label>
+								<label>ID de PlayStation Network</label>
+								<label>ID de Steam</label>
+								<label>ID de XBox Live</label>
+								<button>Cambiar contraseña</button>
+								<div class='col-12 p-0 b-transluced mt-2 text-center'>
+									<input type="submit" class="col-12 text-white btn btn-primary" value="GUARDAR">
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane container mt-5" id="config">
+							<form class="">
+								<h1 class="">CONFIGURACION DEL FORO</h1>
+								<label>Elegir tema (aspecto visual del foro)</label>
+								<label>Formato de fechas</label>
+								<label>Zona horaria</label>
+								<label>Mensajes por página</label>
+								<label>Mostrar primero (temas antiguos o temas nuevos)</label>
+								<div class='col-12 p-0 b-transluced mt-2 text-center'>
+									<input type="submit" class="col-12 text-white btn btn-primary" value="GUARDAR">
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane container mt-5" id="mencion">
+							<h1 class="">MENCIONES</h1>
+							<label>No disponible</label>
+						</div>
+						<div class="tab-pane container mt-5" id="stats">
+							<h1 class="">ESTADISTICAS DE USUARIO</h1>
+							<label>Fecha de registro</label>
+							<label>Último mensaje</label>
+							<label>Total de temas iniciados</label>
+							<label>Total de temas iniciados global</label>
+							<label>Total de mensajes escrito</label>
+							<label>Total de mensajes escritos global</label>
+							<label></label>
+							<label></label>
+						</div>
+						<div class="tab-pane container mt-5" id="mp">
+							<h1 class="">MENSAJES PRIVADOS</h1>
+						</div>
 					</div>
-					<div class="tab-pane container mt-5" id="info">
-						<form onsubmit="return comprobar()" action="index.php?controller=usuario&action=crear" method="post">
-							<input class="col-6 col-sm-5 col-md-5 col-lg-4 col-xl-3 centext text-center" name="nombreCR" type="text" placeholder="NOMBRE COMPLETO" /> 
-							<input class="col-6 col-sm-5 col-md-5 col-lg-4 col-xl-3 centext text-center" name="nombreR" type="text" placeholder="NOMBRE USUARIO" /> <br>
-							<input class="col-6 col-sm-5 col-md-5 col-lg-4 col-xl-3 centext text-center" name="emailR" type="text" placeholder="E-MAIL"/>
-							<input class="col-6 col-sm-5 col-md-5 col-lg-4 col-xl-3 centext text-center" name="direccionR" type="text" placeholder="DIRECCION"/><br>
-							<input class="col-6 col-sm-5 col-md-5 col-lg-4 col-xl-3 centext text-center"  name="postalR" type="text" placeholder="CODIGO POSTAL"/><br>
-							<input class="col-6 col-sm-5 col-md-5 col-lg-4 col-xl-3 centext text-center"  name="password1R" type="password" placeholder="PASSWORD"/> 
-							<input class="col-6 col-sm-5 col-md-5 col-lg-4 col-xl-3 centext text-center"  name="password2R" type="password" placeholder="REPEAT"/><br><br>
-							<label>Escribe el resultado de la suma con letras.</label><br>
-							<input class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 centext text-center"  type="text" size="10" disabled /> + 
-							<input class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 centext text-center"  type="text" size="10" disabled /> = 
-							<input class="col-4 col-sm-5 col-md-4 col-lg-3 col-xl-2 centext text-center"  type="text" size="12" /><br>
-							<input type="submit" value="Crear cuenta" class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 mt-5 btn btn-success" />
-							<br><br><br><a href="index.php?controller=vistas&acction=home"><input type="button" value="cancelar" class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 mt-5 small btn btn-warning" /></a>
-							<br>
-						</form>
-					</div>
-				</div>
 			</div>
-		</div>
-	</body>
         
         <?php include "footer.php"; ?>
-    
+   
     </body>
 </html>

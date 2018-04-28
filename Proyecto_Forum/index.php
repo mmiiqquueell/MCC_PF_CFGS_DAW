@@ -2,6 +2,7 @@
 session_start();
 require_once("base_de_datos/db.php");
 require_once("controladores/view_controller.php");
+require_once("controladores/user_controller.php");
 
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
@@ -12,6 +13,8 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         $controller = new controlador_vistas();
         
         if($_GET['action'] == "indice") {$controller -> indice();}
+        elseif($_GET['action'] == "registrar") {$controller -> registrar();}
+        
        
     } 
     
@@ -35,7 +38,10 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         
     /* CONTROLADOR DE USUARIO */
     elseif ($_GET['controller'] == "usuario") {
+    	
+    	$controller = new controlador_usuario();
        
+       if($_GET['action'] == "crear"){$controller -> crear();}
     
     }
 } 

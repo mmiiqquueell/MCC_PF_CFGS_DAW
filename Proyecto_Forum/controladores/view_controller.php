@@ -16,6 +16,11 @@ class controlador_vistas {
         require_once ("vistas/iniciar.php");
     }
     
+    public function registrar()
+    {
+    	require_once ("vistas/registrar.php");
+    }
+    
     
     public function indice()
     {
