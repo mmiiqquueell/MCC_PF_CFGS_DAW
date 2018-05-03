@@ -37,19 +37,17 @@
                 </div>
             </div>
             <?php 
-            $a = null; $b = 0;
-            
-            foreach ($temas as $temas){
-            	if ($a != $temas['nombre']){
-		            echo "<div class='col-12 row p-0 pb-2 pt-3 b-transluced pl-lg-0 mx-auto'>
-		                <div class='col-12 rounded bg-warning-custom'>
-		                    <a href='index.php?controller=vistas&action=indica&id=".$temas['id']."'><h3 class='font-weight-bold text-dark'>".$temas['nombre']."</h3></a>
-		                </div>
-		            </div>";
-		            $a = $temas['nombre']; }
+                       
+            foreach ($tema as $tema){
+      			echo "<div class='col-12 row p-0 pb-2 pt-3 b-transluced pl-lg-0 mx-auto'>
+						<div class='col-12 rounded bg-warning-custom'>
+							<a><h3 class='font-weight-bold text-dark'>".$tema['nombre']."</h3></a>
+						</div>
+		            </div>"; 
+		            }
 		 
 		 		for ($i = 0; $i < count($subtemas); $i++ ){
-					if($temas['id'] == $subtemas[$i]['padre']){
+					if($tema['id'] == $subtemas[$i]['padre']){
 		            echo "<div class='col-12 row b-transluced p-0 pl-lg-0 pb-1 mx-auto'>
 		            	<div class='rounded-left col-7 border bg-white pb-2'>
 				            <span>".$subtemas[$i]['categoria']."</span><br>
@@ -66,9 +64,7 @@
 				            <span>Mike a las 16:35</span>
 			            </div>
 		            </div>";} 
-				}
-				
-	       };
+				};
            ?>
         </main>   
     

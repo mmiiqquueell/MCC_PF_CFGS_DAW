@@ -13,10 +13,10 @@
         </form>
         <ul class="col-5 row navbar-nav">
             <li class="nav-item col-5">
-                <a class="nav-link btn btn-primary" href="#">Iniciar Sesión</a>
+                <a class="nav-link btn btn-primary" href="index.php?controller=vistas&action=pantalla_login">Iniciar Sesión</a>
             </li>
             <li class="nav-item col-5">
-                <a class="nav-link btn btn-primary" href="#">Registrarse</a>
+                <a class="nav-link btn btn-primary" href="index.php?controller=vistas&action=registrar">Registrarse</a>
             </li>
             <li class="nav-item col-1">
                 <button id="CRT" class='btn btn-info mr-1 mb-1 CRT' value="CRT" data-toggle="tooltip" title="Activa/Desactiva efecto CRT"></button>
@@ -35,4 +35,3 @@
         </ul>
     </nav>
 </header>
-       

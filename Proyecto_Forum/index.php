@@ -12,31 +12,19 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         
         $controller = new controlador_vistas();
         
-        if($_GET['action'] == "indice") {$controller -> indice();}
-        elseif($_GET['action'] == "pantalla_login") {$controller -> pantalla_login();}
-        elseif($_GET['action'] == "registrar") {$controller -> registrar();}
-        
-       
-    } 
-    
-    /* CONTROLADOR DE CATEGORIAS */
-    elseif ($_GET['controller'] == "categoria") {
-        
-        
-    }
-     
-    /* CONTROLADOR DE CESTA */
-    elseif ($_GET['controller'] == "cesta") {
-        
-     
-    } 
-    
-    /* CONTROLADOR DE PRODUCTO */
-    elseif ($_GET['controller'] == "producto") {
-        
+        if($_GET['action'] == "indice") {$controller -> indice();} // Mostrar temas principales
+        elseif($_GET['action'] == "indica") {$controller -> indica();} // Mostrar temas principales separados
+        elseif($_GET['action'] == "subindice") {$controller -> mostrar_subtemas();} // Mostrar SubTemas
+        elseif($_GET['action'] == "pantalla_login") {$controller -> pantalla_login();} // Mostrar pantalla de login
+        elseif($_GET['action'] == "registrar") {$controller -> registrar();} // Mostrar pantalla de registro
+        elseif($_GET['action'] == "perfil") {$controller -> mostrar_perfil();} // Mostrar pantalla de perfil
+        elseif($_GET['action'] == "nuevoTema") {$controller -> mostrar_crear_tema();} // Mostrar pantalla de nuevo tema
+        elseif($_GET['action'] == "responder") {$controller -> mostrar_responder();} // Mostrar pantalla de responder tema
+        elseif($_GET['action'] == "editar") {$controller -> mostrar_editar();} // Mostrar pantalla de editar mensaje
+        elseif($_GET['action'] == "master") {$controller -> mostrar_master();} // Mostrar pantalla de administración
         
     } 
-        
+            
     /* CONTROLADOR DE USUARIO */
     elseif ($_GET['controller'] == "usuario") {
     	
@@ -48,8 +36,8 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     }
 } 
 
-/* DEFAULT START -> Pantalla de LOGIN */
+/* DEFAULT START -> Pantalla principal */
 else {
     $controller = new controlador_vistas();
-    $controller -> seguridad_temporal();
+    $controller -> indice();
 }

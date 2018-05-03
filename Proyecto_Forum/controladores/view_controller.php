@@ -4,16 +4,34 @@
 * Controlador de vistas
 * @autor Miquel Costa
 */
-// require_once("modelos/modelo_usuario.php");
+ require_once("modelos/view_model.php");
 
 class controlador_vistas {    
 
     /**
-     * Permite acceder a la web mientras está sin protección. Será eliminado posteriormente cuando login sea seguro.
+     * Permite acceder a la web INDICE mostrando los temas principales con sus categorias
      */
-    public function seguridad_temporal()
+    public function indice()
     {
-        require_once ("vistas/iniciar.php");
+    	$obtener_temas = new modelo_vistas();
+    	$temas = $obtener_temas -> listar_temas();
+    	$subtemas = $obtener_temas -> listar_subtemas();
+        if($temas && $subtemas){require_once 'vistas/indice.php';}
+        else{header("Location: vistas/indice.php&error1");};
+    }
+    
+    /**
+     * Muestra el indice pero solo el tema principal seleccionado por el usuario.
+     */
+    public function indica()
+    {
+    	$id = $_GET['id'];
+    	$obtener_tema = new modelo_vistas();
+    	$obtener_tema -> setId($id);
+    	$tema = $obtener_tema -> listar_tema();
+    	$subtemas = $obtener_tema -> listar_subtemas();
+    	if($tema && $subtemas){require_once 'vistas/indica.php';}
+    	else{header("Location: vistas/indica.php&error1");};
     }
     
     
@@ -27,69 +45,6 @@ class controlador_vistas {
     {
     	require_once ("vistas/registrar.php");
     }
+
     
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public function indice()
-    {
-        $usuario = $_POST['nombre'];
-        $password = $_POST['password'];
-        if ($usuario == 'Administrador' && $password == 'Ageofempires2') {
-            header ("Location: vistas/indice.php");
-        } else {
-            echo "¡ACCESS DENIED!";
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-    * Muestra página portada // Añade función para mostrar cesta
-    */
-    public function home(){
-        $productos = new modelo_producto();
-        $productosC = new modelo_producto();
-        $pro = $productos -> get_producto();
-        $proC = $productosC -> get_producto_slider();
-        $user = new modelo_usuario(); 
-        $uNivel = $user -> get_nivel();
-        if(isset($_SESSION['nombre'])){
-            $cesta = new modelo_cesta();
-            $cesta -> setNombre($_SESSION['nombre']);
-            $ucesta = $cesta -> get_id_cesta();
-            $cesta -> setIdCesta($ucesta['ID']);
-            $lista3 = $cesta -> lista_cesta();
-            $CanPro = $cesta -> get_cantidad_productos();
-        }
-        else{
-            if(isset($_SESSION['invitado']) && !isset($_SESSION['invitadoD'])){
-                $CanPro['CARRITO'] = count($_SESSION['invitado']);
-            }
-            elseif(isset($_SESSION['invitadoD']) && !isset($_SESSION['invitado'])){
-                $CanPro['CARRITO'] = count($_SESSION['invitadoD']);
-            }
-            elseif(isset($_SESSION['invitado']) && isset($_SESSION['invitadoD'])){
-                $CanPro['CARRITO'] = (count($_SESSION['invitadoD']) + count($_SESSION['invitado']));
-            }
-            else {$CanPro['CARRITO'] = "0";}
-        }
-        require_once ("vistas/portada.php");
-    }
-        
 }
