@@ -37,33 +37,40 @@
                 </div>
             </div>
             <?php 
-                       
+            $post = 0; $totalmsg = 0;
             foreach ($tema as $tema){
       			echo "<div class='col-12 row p-0 pb-2 pt-3 b-transluced pl-lg-0 mx-auto'>
 						<div class='col-12 rounded bg-warning-custom'>
-							<a><h3 class='font-weight-bold text-dark'>".$tema['nombre']."</h3></a>
+							<h3 class='font-weight-bold text-dark'>".$tema['nombre']."</h3>
 						</div>
 		            </div>"; 
 		            }
 		 
 		 		for ($i = 0; $i < count($subtemas); $i++ ){
 					if($tema['id'] == $subtemas[$i]['padre']){
+						for($p = 0; $p < count($contapost); $p++){
+							if($subtemas[$i]['id'] == $contapost[$p]['subtema']){$post++;
+								for($m = 0; $m < count($MSGT); $m++){
+									if($subtemas[$i]['id'] == $contapost[$p]['subtema'] && $contapost[$p]['id'] == $MSGT[$m]['post']){$totalmsg++;}
+								}
+							}
+						}
 		            echo "<div class='col-12 row b-transluced p-0 pl-lg-0 pb-1 mx-auto'>
-		            	<div class='rounded-left col-7 border bg-white pb-2'>
+		            	<a href='index.php?controller=vistas&action=subindice&idst=".$subtemas[$i]['id']."&idt=".$tema['id']."' class='rounded-left col-7 border bg-white pb-2'>
 				            <span>".$subtemas[$i]['categoria']."</span><br>
 				            <span>".$subtemas[$i]['descripcion']."</span>
-		            	</div>
+		            	</a>
 		            	<div class='col-1 border bg-white text-center'>
-			            	<h2 class=''>1</h2>
+			            	<h2 class=''>".$post."</h2>
 			            </div>
 			            <div class='col-1 border bg-white text-center'>
-			            	<h2>1</h2>
+			            	<h2>".$totalmsg."</h2>
 			            </div>
 				        <div class='rounded-right col-3 border bg-white pb-2'>
 				            <span>Consola no enciende</span><br>
 				            <span>Mike a las 16:35</span>
 			            </div>
-		            </div>";} 
+		            </div>";} $post = 0; $totalmsg = 0;
 				};
            ?>
         </main>   

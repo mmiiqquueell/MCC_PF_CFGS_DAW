@@ -16,8 +16,10 @@ class controlador_vistas {
     	$obtener_temas = new modelo_vistas();
     	$temas = $obtener_temas -> listar_temas();
     	$subtemas = $obtener_temas -> listar_subtemas();
-        if($temas && $subtemas){require_once 'vistas/indice.php';}
-        else{header("Location: vistas/indice.php&error1");};
+    	$contapost = $obtener_temas -> contador_post();
+    	$MSGT = $obtener_temas -> contador_mensajes_totales();
+    	if($temas && $subtemas && $contapost && $MSGT){require_once 'vistas/indice.php';}
+        else{header("Location: vistas/indice.php&error1");}
     }
     
     /**
@@ -28,10 +30,13 @@ class controlador_vistas {
     	$id = $_GET['id'];
     	$obtener_tema = new modelo_vistas();
     	$obtener_tema -> setId($id);
+    	$temas = $obtener_tema -> listar_temas();
     	$tema = $obtener_tema -> listar_tema();
     	$subtemas = $obtener_tema -> listar_subtemas();
-    	if($tema && $subtemas){require_once 'vistas/indica.php';}
-    	else{header("Location: vistas/indica.php&error1");};
+    	$contapost = $obtener_tema -> contador_post();
+    	$MSGT = $obtener_tema -> contador_mensajes_totales();
+    	if($tema && $temas && $subtemas && $contapost && $MSGT){require_once 'vistas/indica.php';}
+    	else{header("Location: vistas/indica.php&error1");}
     }
     
     
@@ -46,5 +51,23 @@ class controlador_vistas {
     	require_once ("vistas/registrar.php");
     }
 
+    public function mostrar_subindice() 
+    {
+    	$idst = $_GET['idst'];
+    	$id = $_GET['idt'];
+    	$obtener_subtema = new modelo_vistas();
+    	$obtener_subtema -> setIdst($idst);
+    	$obtener_subtema -> setId($id);
+    	$temas = $obtener_subtema -> listar_temas();
+    	$tema = $obtener_subtema -> listar_tema();
+    	$subtema = $obtener_subtema -> listar_subtema();
+    	$post = $obtener_subtema -> mostrar_posts();
+    	$MSG = $obtener_subtema -> contador_mensajes_totales();
+    	$usuarios = $obtener_subtema -> get_user();
+    	if($post) {require_once 'vistas/subindice.php';}
+    	else{header("Location: vistas/subindice.php&error1");}
+    }
+    
+    
     
 }

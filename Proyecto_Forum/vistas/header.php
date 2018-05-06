@@ -26,12 +26,16 @@
     </nav>
     <nav class="col-12 navbar-expand-sm">
        <ul class="col-12 navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">CAT1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">CAT2</a>
-            </li>
+       		<?php 
+            foreach ($temas as $categorias){
+            echo "
+                <a class='col-1 text-center rounded bg-warning p-1 pb-2 mx-auto' href='index.php?controller=vistas&action=indica&id=".$categorias['id']."'>
+					<li>
+                   		<span class='font-weight-bold text-dark'>".$categorias['nombre']."</span>
+                	</li>
+				</a>";
+		       }
+		    ?>
         </ul>
     </nav>
 </header>
