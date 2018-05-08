@@ -18,7 +18,9 @@ class modelo_vistas{
     public function getIdt() {return $this->idt;}
     public function setIdt($idt) {$this->idt = $idt;}
     public function getIdst() {return $this->idst;}
-    public function setIdst($idst) {$this->idst = $idst;}
+    public function setIdst($idst) {$this->idst = $idst;}    
+    public function getIdp() {return $this->idp;}
+    public function setIdp($idp) {$this->idp = $idp;}
     public function getTema() {return $this->tema;}
     public function setTema($temas) {$this->tema = $tema;}
     public function getTemas() {return $this->temas;}
@@ -29,12 +31,16 @@ class modelo_vistas{
     public function setSubtema($subtema) {$this->subtema = $subtema;}
     public function getContapost() {return $this->contapost;}
     public function setContapost($contapost) {$this->contapost= $contapost;}
+    public function getPost() {return $this->post;}
+    public function setPost($post) {$this->post= $post;}
     public function getMSGT() {return $this->msgt;}
     public function setMSGT($msgt) {$this->msgt= $msgt;}
     public function getMSG() {return $this->msg;}
     public function setMSG($msg) {$this->msg= $msg;}
     public function getUsers() {return $this->users;}
     public function setUsers($users) {$this->users= $users;}
+    public function getPreferencias() {return $this->preferencias;}
+    public function setPreferencias($preferencias) {$this->preferencias= $preferencias;}
     
     
     /**
@@ -98,4 +104,23 @@ class modelo_vistas{
     	while($filas=$consulta->fetch_assoc()){$this->users[]=$filas;}
     	return $this->users;
     }
+    
+    public function mostrar_post(){
+    	$consulta=$this->db->query("SELECT * FROM post WHERE id = '{$this->idp}';");
+    	while($filas=$consulta->fetch_assoc()){$this->post=$filas;}
+    	return $this->post;
+    }
+    
+    public function mostrar_mensajes(){
+    	$consulta=$this->db->query("SELECT * FROM mensajes WHERE post = '{$this->idp}';");
+    	while($filas=$consulta->fetch_assoc()){$this->msg[]=$filas;}
+    	return $this->msg;
+    }
+    
+    public function mostrar_preferencias(){
+    	$consulta=$this->db->query("SELECT * FROM preferencias;");
+    	while($filas=$consulta->fetch_assoc()){$this->preferencias[]=$filas;}
+    	return $this->preferencias;
+    }
+    
 }

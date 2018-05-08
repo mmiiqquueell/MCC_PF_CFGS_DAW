@@ -14,7 +14,8 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         
         if($_GET['action'] == "indice") {$controller -> indice();} // Mostrar temas principales
         elseif($_GET['action'] == "indica") {$controller -> indica();} // Mostrar temas principales separados
-        elseif($_GET['action'] == "subindice") {$controller -> mostrar_subindice();} // Mostrar SubTemas
+        elseif($_GET['action'] == "subindice") {$controller -> mostrar_subindice();} // Mostrar SubTemas        
+        elseif($_GET['action'] == "tema") {$controller -> mostrar_tema();} // Mostrar SubTemas
         elseif($_GET['action'] == "pantalla_login") {$controller -> pantalla_login();} // Mostrar pantalla de login
         elseif($_GET['action'] == "registrar") {$controller -> registrar();} // Mostrar pantalla de registro
         elseif($_GET['action'] == "perfil") {$controller -> mostrar_perfil();} // Mostrar pantalla de perfil

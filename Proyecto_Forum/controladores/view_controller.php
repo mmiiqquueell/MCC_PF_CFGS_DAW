@@ -42,12 +42,16 @@ class controlador_vistas {
     
     public function pantalla_login()
     {
+    	$obtener_categorias = new modelo_vistas();
+    	$temas = $obtener_categorias-> listar_temas();
     	require_once ("vistas/login.php");
     }
     
     
     public function registrar()
     {
+    	$obtener_categorias= new modelo_vistas();
+    	$temas = $obtener_categorias-> listar_temas();
     	require_once ("vistas/registrar.php");
     }
 
@@ -68,6 +72,24 @@ class controlador_vistas {
     	else{header("Location: vistas/subindice.php&error1");}
     }
     
-    
+    public function mostrar_tema()
+    {
+    	$idp = $_GET['idp'];
+    	$idt = $_GET['idt'];
+    	$idst = $_GET['idst'];
+    	$obtener_post = new modelo_vistas();
+    	$obtener_post -> setIdp($idp);
+    	$obtener_post -> setId($idt);
+    	$obtener_post -> setIdst($idst);
+    	$temas = $obtener_post -> listar_temas();
+    	$tema = $obtener_post -> listar_tema();
+    	$subtema = $obtener_post -> listar_subtema();
+    	$post = $obtener_post -> mostrar_post();
+    	$mensajes = $obtener_post -> mostrar_mensajes();
+    	$usuarios = $obtener_post -> get_user();
+    	$preferencias = $obtener_post -> mostrar_preferencias();
+    	if($post && $mensajes){require_once 'vistas/tema.php';}
+    	else{header("Location: vistas/tema.php&error1");}
+    }
     
 }

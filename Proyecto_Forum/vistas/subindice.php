@@ -36,7 +36,7 @@
             
             
             <?php 
-            $men = 0;
+            $men = 0; $idst = $_GET['idst']; $idt = $_GET['idt'];
             foreach ($tema as $tema){
             	echo "
 					<div class='col-12 row p-0 pb-2 b-transluced pl-lg-0 mx-auto'>
@@ -65,20 +65,21 @@
             				if($MSG[$i]['creacion'] > $fecha && $MSG[$i]['usuario'] == $usuarios[$u]['id']){
 	            				$fecha = $MSG[$i]['creacion']; 
 	            				$escritor = $usuarios[$u]['nombre'];
+	            				$idp = $cuestiones['id'];
             				}
             			}
             		}
             	}
             	echo "
 				<div class='col-12 row b-transluced p-0 pl-lg-0 pb-1 mx-auto'>
-	                <a class='rounded-left col-7 border bg-white pb-2'>
-	                    <h4 class='mb-0'>".$cuestiones['titulo']."</h4>
-						<span>".$creador."</span>
+	                <a href='index.php?controller=vistas&action=tema&idp=".$idp."&idt=".$idt."&idst=".$idst."' class='rounded-left col-7 border bg-white pb-0'>
+	                    <span class='mb-0 text-bold'>".$cuestiones['titulo']."</span><br>
+						<span>Por ".$creador."</span>
 	                </a>
 	                <div class='col-2 border bg-white text-center'>
-	                    <h2 class='pt-1'>".$men."</h2>
+	                    <h2 class='p-0'>".$men."</h2>
 	                </div>
-	                <div class='rounded-right col-3 border bg-white pt-2 pb-2'>
+	                <div class='rounded-right col-3 border bg-white p-0 p-1'>
 	                    <span>Por ".$escritor."<br>El ".$fecha."</span>
 	                </div>
 	            </div>"; $men = 0;
