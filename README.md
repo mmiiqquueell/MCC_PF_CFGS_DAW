@@ -1,29 +1,39 @@
 # MCC_PF_CFGS_DAW
 
-El proyecto es un foro de discusión donde los usuarios podran hablar y comentar sobre dudas, información y otros detalles de antiguas consolas.
+El proyecto es un foro de discusión donde los usuarios podran hablar y comentar sobre dudas, información y otros detalles de antiguas consolas (en realidad cualquier cosa, la idea es que funcione la web).
 
 
 
 IMPLEMENTACIÓN BÁSICA:
 ----------------------------------------------------------------------------------------------------------
-- Ver y crear temas así como responder con mensajes (vamos, un foro)
-- Registrarse y loguearse
-- Escribir, editar y eliminar comentarios
-- Editar preferencias de perfil básicas
-- Responsive para smartphones/tablets
-- Seguridad con cifrados (SHA-512)
+:heavy_check_mark: Mostrar temas principales
+:heavy_check_mark: Mostrar subtemas
+:heavy_check_mark: Mostrar post
+:heavy_check_mark: Mostrar mensajes
+:heavy_check_mark: Registro
+:heavy_check_mark: Login
+:heavy_multiplication_x: Crear post
+:heavy_multiplication_x: Responder mensajes
+:heavy_multiplication_x: Editar mensajes
+:heavy_multiplication_x: Mostrar estadisticas de usuario
+:heavy_multiplication_x: Modelo adaptativo (Responsive)
+
 
 
 
 IMPLEMENTACIÓN EXTRA:
 ----------------------------------------------------------------------------------------------------------
-- Mensajes con estilos (Negrita, cursiva, tamaño de fuente, tipo de fuente, etc...)
-- Preferencias de usuario (Más opciones como cantidad de mensajes por página, cambiar contraseña, avatar, firma, etc...)
-- Seleccion de temas visuales (De momento 2, el original y simplificado para conexiones lentas, si da tiempo añadire más)
-- Mensajes privados y menciones
-- Colecciones (Para mostrar tu coleccion al mundo de consolas y juegos antiguos)
+:heavy_check_mark: Seguridad cifrado SHA-512
+:heavy_multiplication_x: Validación de email
+:heavy_multiplication_x: Poner y mostrar avatar
+:heavy_multiplication_x: Poner y mostrar firma
+:heavy_multiplication_x: Mensajeria privada
+:heavy_multiplication_x: Ajustes de la cuenta (Mensajes por post, orden, botones, etc...)
+:heavy_multiplication_x: Mandar mensajes con estilos (Negrita, cursiva, tamaño, fuente, links, videos, imagenes, etc...)
+:heavy_multiplication_x: Temas visuales
+:heavy_multiplication_x: Colecciones (Muestra tu coleccion de consolas/PC)
 
 
 ----------------------------------------------------------------------------------------------------------
 Página web: www.mcc-daw.tk
-Por favor, entiende que esto es un proyecto de final de curso por lo que pediria que no hicieras spam y publicaciones no deseadas cuando el foro tenga una funcionalidad mínima estable en su versión v0.5 Beta, gracias.
+Por favor, entiende que esto es un proyecto de final de curso por lo que pediria que no hicieras spam y publicaciones no deseadas, gracias.
