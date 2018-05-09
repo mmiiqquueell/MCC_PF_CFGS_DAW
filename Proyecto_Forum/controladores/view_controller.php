@@ -86,6 +86,7 @@ class controlador_vistas {
     	$subtema = $obtener_post -> listar_subtema();
     	$post = $obtener_post -> mostrar_post();
     	$mensajes = $obtener_post -> mostrar_mensajes();
+    	$MSG = $obtener_post -> contador_mensajes_totales();
     	$usuarios = $obtener_post -> get_user();
     	$preferencias = $obtener_post -> mostrar_preferencias();
     	if($post && $mensajes){require_once 'vistas/tema.php';}
