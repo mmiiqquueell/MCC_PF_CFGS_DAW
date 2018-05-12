@@ -40,6 +40,21 @@ class modelo_usuario{
     	else {return false;}
     }
     
+    public function get_user_id()
+    {
+    	$consulta=$this->db->query("SELECT id FROM usuarios WHERE nombre = '{$this->nombre}';");
+    	while($filas=$consulta->fetch_assoc()){$this->id=$filas;}
+    	return $this->id;
+    }
+    
+    public function crear_usuario2()
+    {
+    	$sql="INSERT INTO preferencias (usuario,avatar,firma,tema,sexo,biografia,steam,playstation,xboxlive,nintendo,edad,mensajes,estilofecha,zonahoraria,paginaweb,ordenmensajes) VALUES ('{$this->id}','avatar_default.jpg',NULL,'Oficial','No mostrar',NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,NULL,'Ascendiente')";
+    	$result = $this->db->query($sql);
+    	if ($this->db->error){return "$sql<br>{$this->db->error}";}
+    	else {return false;}
+    }
+    
     /**
      * Devuelve el valor del nombre para saber si ya existe un usuario con dicho nombre.
      * @return boolean devuelve true si existe, false si no existe.

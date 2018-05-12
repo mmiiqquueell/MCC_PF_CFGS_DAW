@@ -124,7 +124,7 @@
     <body class="container">
         <?php include "header.php"; ?>
 		<div id="filtro" class="filtro"></div>
-        <main class="pb-2 text-center text-white">
+        <main class="p-2 text-center text-white">
             <h2 class="bg-warning-custom rounded">Creación de cuenta</h2>
             <form class="pb-5" onsubmit="return comprobar()" action="index.php?controller=usuario&action=crear" method="post">
                 <input type="text" name="usuario" placeholder="Nombre de usuario"/><br><br>

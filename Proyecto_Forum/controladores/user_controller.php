@@ -47,6 +47,10 @@ class controlador_usuario
 		elseif($existe_email) {header("Location: index.php?controller=vistas&action=registrar&error9");}
 		else{
 			$error = $nuevo_usuario -> crear_usuario();
+			$nuevo_usuario -> setNombre($nombre);
+			$id_user = $nuevo_usuario -> get_user_id();
+			$nuevo_usuario -> setId($id_user['id']);
+			$error2 = $nuevo_usuario -> crear_usuario2();
 			if (!$error) {
 				$para      = $email1;
 				$titulo    = 'Activación de cuenta RGF';
@@ -55,8 +59,7 @@ class controlador_usuario
 						'From: no-reply@RetroGamingForum.com' . "\r\n" .
 						'Reply-to: no-reply@RetroGamingForum.com' . "\r\n" .
 						'X-Mailer: PHP/' . phpversion();
-				
-				mail($para, $titulo, $mensaje, $cabeceras);				
+				mail($para, $titulo, $mensaje, $cabeceras);		
 				header("Location: index.php?controller=vistas&action=registrar&info1");}
 			else {header("Location: index.php?controller=vistas&action=registrar&error10");}
 		}
