@@ -47,7 +47,8 @@ class modelo_vistas{
      * Devuelve el nombre los temas existentes para listarlos en el indice general.
      * @return devuelve los temas existentes.
      */
-    public function listar_temas(){
+    public function listar_temas()
+    {
     	$consulta=$this->db->query("SELECT * FROM temas ORDER BY nombre ASC;");
     	while($filas=$consulta->fetch_assoc()){$this->temas[]=$filas;}
     	return $this->temas;
@@ -58,7 +59,8 @@ class modelo_vistas{
      * Devuelve el nombre del tema seleccionado por el usuario.
      * @return Devuelve el tema seleccionado.
      */
-    public function listar_tema(){
+    public function listar_tema()
+    {
     	$consulta=$this->db->query("SELECT * FROM temas WHERE id = '{$this->id}';");
     	while($filas=$consulta->fetch_assoc()){$this->tema[]=$filas;}
     	return $this->tema;
@@ -68,56 +70,65 @@ class modelo_vistas{
      * Devuelve el nombre los subtemas existentes para listarlos en el indice de subtemas.
      * @return devuelve los subtemas existentes.
      */
-    public function listar_subtemas(){
+    public function listar_subtemas()
+    {
     	$consulta=$this->db->query("SELECT * FROM subtemas;");
     	while($filas=$consulta->fetch_assoc()){$this->subtemas[]=$filas;}
     	return $this->subtemas;
     }    
     
     
-    public function contador_post(){
+    public function contador_post()
+    {
     	$consulta=$this->db->query("SELECT * FROM post;");
     	while($filas=$consulta->fetch_assoc()){$this->contapost[]=$filas;}
     	return $this->contapost;
     }
     
-    public function contador_mensajes_totales(){
+    public function contador_mensajes_totales()
+    {
     	$consulta=$this->db->query("SELECT * FROM mensajes;");
     	while($filas=$consulta->fetch_assoc()){$this->msgt[]=$filas;}
     	return $this->msgt;
     }
     
-    public function mostrar_posts(){
+    public function mostrar_posts()
+    {
     	$consulta=$this->db->query("SELECT * FROM post WHERE subtema = '{$this->idst}';");
     	while($filas=$consulta->fetch_assoc()){$this->subtemas[]=$filas;}
     	return $this->subtemas;
     }
     
-    public function listar_subtema(){
+    public function listar_subtema()
+    {
     	$consulta=$this->db->query("SELECT * FROM subtemas WHERE id = '{$this->idst}';");
     	while($filas=$consulta->fetch_assoc()){$this->subtema=$filas;}
     	return $this->subtema;
     } 
     
-    public function get_user(){
+    public function get_user()
+    {
     	$consulta=$this->db->query("SELECT * FROM usuarios;");
     	while($filas=$consulta->fetch_assoc()){$this->users[]=$filas;}
     	return $this->users;
     }
     
-    public function mostrar_post(){
+    public function mostrar_post()
+    {
     	$consulta=$this->db->query("SELECT * FROM post WHERE id = '{$this->idp}';");
     	while($filas=$consulta->fetch_assoc()){$this->post=$filas;}
     	return $this->post;
     }
     
-    public function mostrar_mensajes(){
-    	$consulta=$this->db->query("SELECT * FROM mensajes WHERE post = '{$this->idp}';");
+    public function mostrar_mensajes()
+    {
+    	$consulta=$this->db->query("SELECT * FROM mensajes;");
     	while($filas=$consulta->fetch_assoc()){$this->msg[]=$filas;}
     	return $this->msg;
     }
     
-    public function mostrar_preferencias(){
+    public function mostrar_preferencias()
+    {
     	$consulta=$this->db->query("SELECT * FROM preferencias;");
     	while($filas=$consulta->fetch_assoc()){$this->preferencias[]=$filas;}
     	return $this->preferencias;

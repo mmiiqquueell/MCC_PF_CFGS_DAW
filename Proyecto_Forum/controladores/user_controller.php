@@ -7,18 +7,28 @@
 
 require_once("modelos/user_model.php");
 
-class controlador_usuario {
+class controlador_usuario 
+{
    
 	/**
 	 * Permite crear un nuevo usuario // Los filtros se hacen mediante JavaScript y posteriormente por mayor seguridad por PHP
 	 */
-	function crear(){
+	function crear()
+	{
 		$nombre = $_POST['usuario'];
 		$email1 = $_POST['email'];
 		$email2 = $_POST['remail'];
 		$password1 = $_POST['password'];
 		$password2 = $_POST['rpassword'];
-		$cifrado = uniqid();
+		$nuevo_usuario = new modelo_usuario();
+		$key = $nuevo_usuario -> check_key();
+		
+		for ($i = 0; $i < count($key); $i++){
+			$cifrado = uniqid();
+			if($cifrado == $key[$i]['validar']) {$cifrado = uniqid();}
+			else {break;}
+		}
+		
 		if (strlen(trim($password1)) < 8) {header("Location: index.php?controller=vistas&action=registrar&error1");}
 		elseif (!preg_match('/[a-z]/', $password1)) {header("Location: index.php?controller=vistas&action=registrar&error2");}
 		elseif (!preg_match('/[A-Z]/', $password1)) {header("Location: index.php?controller=vistas&action=registrar&error3");}
@@ -26,7 +36,7 @@ class controlador_usuario {
 		elseif (!preg_match('/[@\.\-_]/', $password1)) {header("Location: index.php?controller=vistas&action=registrar&error5");}
 		elseif ($password1 !== $password2) {header("Location: index.php?controller=vistas&action=registrar&error6");}
 		elseif ($email1 !== $email2) {header("Location: index.php?controller=vistas&action=registrar&error7");}
-		$nuevo_usuario = new modelo_usuario();
+		
 		$nuevo_usuario -> setNombre($nombre);
 		$nuevo_usuario -> setPassword($password1);
 		$nuevo_usuario -> setEmail($email1);
@@ -37,7 +47,17 @@ class controlador_usuario {
 		elseif($existe_email) {header("Location: index.php?controller=vistas&action=registrar&error9");}
 		else{
 			$error = $nuevo_usuario -> crear_usuario();
-			if (!$error) {header("Location: index.php?controller=vistas&action=registrar&info1");}
+			if (!$error) {
+				$para      = $email1;
+				$titulo    = 'Activación de cuenta RGF';
+				$mensaje   = 'Su cuenta ha sido creada pero para activarla debe pulsar en este link:' . "\r\n" . "http://www.mcc-daw.tk/index.php?controller=usuario&action=activar&cd=".$cifrado;
+				$cabeceras = 'Content-Type: text/html; charset=UTF-8' . "\r\n" .
+						'From: no-reply@RetroGamingForum.com' . "\r\n" .
+						'Reply-to: no-reply@RetroGamingForum.com' . "\r\n" .
+						'X-Mailer: PHP/' . phpversion();
+				
+				mail($para, $titulo, $mensaje, $cabeceras);				
+				header("Location: index.php?controller=vistas&action=registrar&info1");}
 			else {header("Location: index.php?controller=vistas&action=registrar&error10");}
 		}
 	}    
@@ -46,11 +66,10 @@ class controlador_usuario {
 	/**
 	 * 
 	 */
-	public function login(){
+	public function login()
+	{
 		$nombre = $_POST['usuario'];
 		$password = $_POST['password'];
-		if(!isset($_SESSION['user'])){$_SESSION['user'] = $nombre;}
-		if(!isset($_SESSION['cont'])){$_SESSION['cont'] = $password;}
 		$userLogin = new modelo_usuario();
 		$userLogin -> setNombre($nombre);
 		$userLogin -> setPassword($password);
@@ -60,6 +79,8 @@ class controlador_usuario {
 		elseif($nivelUsuario['nivel'] === '0'){header("Location: index.php?controller=vistas&action=pantalla_login&error2");}
 		elseif($nivelUsuario['nivel'] === '1'){header("Location: index.php?controller=vistas&action=pantalla_login&error3");}
 		else{
+			if(!isset($_SESSION['user'])){$_SESSION['user'] = $nombre;}
+			if(!isset($_SESSION['cont'])){$_SESSION['cont'] = $password;}
 			$iniciarSesion = $userLogin->login();
 			if($iniciarSesion){header("Location: index.php");}
 			else{header("Location: index.php?controller=vistas&action=pantalla_login&error4");}
@@ -67,6 +88,26 @@ class controlador_usuario {
 		
 	}
 	
+	
+	public function activar_cuenta() 
+	{
+		$cod = $_GET['cd']; 
+		$obtener_usuario = new modelo_usuario();
+		$obtener_usuario -> setId($cod);
+		$valida = $obtener_usuario -> verificar_activacion();
+		$validar = (int)$valida['nivel'];
+		if($validar == '10'){
+			$activado = $obtener_usuario -> activar_cuenta();
+			if($activado){header('Location: index.php?controller=vistas&action=activado&act1');}
+			else{echo "Se ha producido un error al activar la cuenta";};
+		} elseif($validar > '10') {
+			header('Location: index.php?controller=vistas&action=activado&act2');
+		} elseif($validar < '10'){
+			header('Location: index.php?controller=vistas&action=activado&act3');
+		}
+		
+		
+	}
 	
 	
 }

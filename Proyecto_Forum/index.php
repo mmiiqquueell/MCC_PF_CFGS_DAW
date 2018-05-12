@@ -23,6 +23,8 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         elseif($_GET['action'] == "responder") {$controller -> mostrar_responder();} // Mostrar pantalla de responder tema
         elseif($_GET['action'] == "editar") {$controller -> mostrar_editar();} // Mostrar pantalla de editar mensaje
         elseif($_GET['action'] == "master") {$controller -> mostrar_master();} // Mostrar pantalla de administración
+        elseif($_GET['action'] == "activado") {$controller -> mostrar_activado();} // Mostrar pantalla de activación de cuenta
+        elseif($_GET['action'] == "salir") {$controller -> cerrar();} // Mostrar pantalla de activación de cuenta
         
     } 
             
@@ -33,6 +35,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
        
        if($_GET['action'] == "crear"){$controller -> crear();}
        if($_GET['action'] == "login"){$controller -> login();}
+       if($_GET['action'] == "activar") {$controller -> activar_cuenta();}
     
     }
 } 

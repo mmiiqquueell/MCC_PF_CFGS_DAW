@@ -61,13 +61,12 @@
             	for($i = 0; $i < count($MSG); $i++){
             		for($u = 0; $u < count($usuarios); $u++){
             			if($cuestiones['id'] == $MSG[$i]['post']){
-            	            				
             				if($MSG[$i]['creacion'] > $fecha && $MSG[$i]['usuario'] == $usuarios[$u]['id']){
 	            				$fecha = $MSG[$i]['creacion']; 
 	            				$escritor = $usuarios[$u]['nombre'];
 	            				$idp = $cuestiones['id'];
             				}
-            			}
+            			} elseif($cuestiones['id'] != $MSG[$i]['post'] || $cuestiones['id']){$idp = $cuestiones['id'];}
             		}
             	}
             	echo "

@@ -11,30 +11,38 @@
                 </div>
             </div>
         </form>
-        <ul class="col-5 row navbar-nav">
-            <li class="nav-item col-5">
-                <a class="nav-link btn btn-primary" href="index.php?controller=vistas&action=pantalla_login">Iniciar Sesión</a>
+        <ul class='col-5 row navbar-nav'>
+        	<li class='nav-item col-5'>
+        <?php
+         if(isset($_SESSION['user'])){
+         	echo "<a class='nav-link btn btn-primary' href='index.php?controller=vistas&action=perfil'>".$_SESSION['user']."</a>
             </li>
-            <li class="nav-item col-5">
-                <a class="nav-link btn btn-primary" href="index.php?controller=vistas&action=registrar">Registrarse</a>
+            <li class='nav-item col-5'>
+                <a class='nav-link btn btn-primary' href='index.php?controller=vistas&action=salir'>Cerrar sesión</a>";
+         } 
+         else{
+        	echo "<a class='nav-link btn btn-primary' href='index.php?controller=vistas&action=pantalla_login'>Iniciar Sesión</a>
             </li>
-            <li class="nav-item col-1">
-                <button id="CRT" class='btn btn-info mr-1 mb-1 CRT' value="CRT" data-toggle="tooltip" title="Activa/Desactiva efecto CRT"></button>
+            <li class='nav-item col-5'>
+                <a class='nav-link btn btn-primary' href='index.php?controller=vistas&action=registrar'>Registrarse</a>";}
+		 ?>
+		 </li>
+            <li class='nav-item col-1'>
+                <button id='CRT' class='btn btn-info mr-1 mb-1 CRT' value='CRT' data-toggle='tooltip' title='Activa/Desactiva efecto CRT'></button>
             </li>
         </ul>
-        
+       
     </nav>
-    <nav class="col-12 navbar-expand-sm">
-       <ul class="col-12 navbar-nav">
-       		<?php 
+    <nav class='col-12 navbar-expand-sm'>
+       <ul class='col-12 navbar-nav'>
+        <?php
             foreach ($temas as $categorias){
             echo "
                 <a class='col-1 text-center rounded bg-warning p-1 pb-2 mx-auto' href='index.php?controller=vistas&action=indica&id=".$categorias['id']."'>
 					<li>
                    		<span class='font-weight-bold text-dark'>".$categorias['nombre']."</span>
                 	</li>
-				</a>";
-		       }
+				</a>";}
 		    ?>
         </ul>
     </nav>

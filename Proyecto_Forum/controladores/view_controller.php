@@ -47,6 +47,13 @@ class controlador_vistas {
     	require_once ("vistas/login.php");
     }
     
+    public function mostrar_activado()
+    {
+    	$obtener_categorias = new modelo_vistas();
+    	$temas = $obtener_categorias-> listar_temas();
+    	require_once ("vistas/activado.php");
+    }
+    
     
     public function registrar()
     {
@@ -93,4 +100,10 @@ class controlador_vistas {
     	else{header("Location: vistas/tema.php&error1");}
     }
     
+    public function cerrar()
+    {
+    	session_unset();
+    	session_destroy();
+    	header("Location: index.php");
+    }
 }

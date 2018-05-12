@@ -84,49 +84,51 @@
             </div>
 			";
             
-            foreach($mensajes as $mensajes){$total_men = 0;
-            	for ($u = 0; $u < count($usuarios); $u++){
-            		if($mensajes['usuario'] == $usuarios[$u]['id']) {$usuarioR = $usuarios[$u]['nombre']; $registroR = $usuarios[$u]['registro'];
-		            	for($i = 0; $i < count($preferencias); $i++){
-		            		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
+            for($m = 0; $m < count($mensajes); $m++){$total_men = 0;
+	            if($_GET['idp'] == $mensajes[$m]['post']){
+	            	for ($u = 0; $u < count($usuarios); $u++){
+	            		if($mensajes[$m]['usuario'] == $usuarios[$u]['id']) {$usuarioR = $usuarios[$u]['nombre']; $registroR = $usuarios[$u]['registro'];
+			            	for($i = 0; $i < count($preferencias); $i++){
+			            		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
+			            	}
+			            	for($j = 0; $j < count($MSG); $j++){
+			            		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
+			            	}
 		            	}
-		            	for($j = 0; $j < count($MSG); $j++){
-		            		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
-		            	}
-	            	}
-	            	
-	            } 
-	           
-	           	if ($total_men <= 25) { $rangoR = "NOVATO";}
-	            elseif($total_men <= 100){ $rangoR = "ENTERADO";}
-	            elseif($total_men <= 250){ $rangoR = "CONOCE";}
-	            elseif($total_men <= 500){ $rangoR = "AVANZADO";}
-	            elseif($total_men <= 1000){ $rangoR = "EXPERTO";}
-	            elseif($total_men <= 2500){ $rangoR = "PROFESIONAL";}
-	            
-	            echo "
-				<div class='col-12 row p-0 pb-2 b-transluced mx-auto'>
-	                <div class='RLT col-2 pb-2 bg-warning text-center'>
-	                    <h5>".$usuarioR."</h5>
-	                </div>
-	                <div class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
-	                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:m:s', strtotime($mensajes['creacion']))."</span> 
-						<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
-						<a class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
-						<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>
-	                </div>
-	                <div class='RLB col-2 pb-3 bg-warning text-center'>
-	                    <img class='mx-auto mb-2 rounded avatar' src='images/avatares/".$avatar."'/>
-	                    <div class='mx-auto mb-2 rounded rango'>".$rangoR."</div>
-	                    <span>MENSAJES:<br>".$total_men."</span><br><br>
-	                    <span>REGISTRO:<br>".date('d/m/Y', strtotime($registroR))."</span><br><br>
-	                    <span>UBICACION:<br> N/D</span><br><br>
-	                    <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div>
-	                </div>
-	                <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
-	                    <p class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".$mensajes['mensaje']."</p>
-	                </div>
-	            </div>"; 
+		            	
+		            } 
+		           
+		           	if ($total_men <= 25) { $rangoR = "NOVATO";}
+		            elseif($total_men <= 100){ $rangoR = "ENTERADO";}
+		            elseif($total_men <= 250){ $rangoR = "CONOCE";}
+		            elseif($total_men <= 500){ $rangoR = "AVANZADO";}
+		            elseif($total_men <= 1000){ $rangoR = "EXPERTO";}
+		            elseif($total_men <= 2500){ $rangoR = "PROFESIONAL";}
+		            
+		            echo "
+					<div class='col-12 row p-0 pb-2 b-transluced mx-auto'>
+		                <div class='RLT col-2 pb-2 bg-warning text-center'>
+		                    <h5>".$usuarioR."</h5>
+		                </div>
+		                <div class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
+		                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:m:s', strtotime($mensajes[$m]['creacion']))."</span> 
+							<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
+							<a class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
+							<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>
+		                </div>
+		                <div class='RLB col-2 pb-3 bg-warning text-center'>
+		                    <img class='mx-auto mb-2 rounded avatar' src='images/avatares/".$avatar."'/>
+		                    <div class='mx-auto mb-2 rounded rango'>".$rangoR."</div>
+		                    <span>MENSAJES:<br>".$total_men."</span><br><br>
+		                    <span>REGISTRO:<br>".date('d/m/Y', strtotime($registroR))."</span><br><br>
+		                    <span>UBICACION:<br> N/D</span><br><br>
+		                    <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div>
+		                </div>
+		                <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
+		                    <p class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".$mensajes[$m]['mensaje']."</p>
+		                </div>
+		            </div>"; 
+	            }
 	            
             }
             

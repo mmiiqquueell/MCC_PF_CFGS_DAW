@@ -31,7 +31,7 @@
     <body class="container">
         <?php include "header.php"; ?>
         <div id="filtro" class="filtro"></div>
-        <main class="pb-2 text-center text-white">
+        <main class="p-2 text-center text-white">
             <h2 class="bg-warning-custom rounded">Inicio de sesión</h2>
             <form class="pb-5" action="index.php?controller=usuario&action=login" method="post">
                 <label>Usuario</label><br>
@@ -52,7 +52,7 @@
 					} elseif (isset($_GET['error3'])) {
 						echo "<script>mostrar1();</script>"."La cuenta a la que intenta acceder ha sido marcada como BOT y bloqueada.";
 					}elseif (isset($_GET['error4'])) {
-						echo "<script>mostrar1();</script>"."El usuario y/o contraseña no son correctos, pro favor, verifique que ha escrito correctamente el nombre u contraseña.";
+						echo "<script>mostrar1();</script>"."El usuario y/o contraseña no son correctos, por favor, verifique que ha escrito correctamente el nombre u contraseña.";
 					}
 				?>
 			</p>
