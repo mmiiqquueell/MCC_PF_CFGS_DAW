@@ -3,6 +3,7 @@ session_start();
 require_once("base_de_datos/db.php");
 require_once("controladores/view_controller.php");
 require_once("controladores/user_controller.php");
+require_once("controladores/post_controller.php");
 
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
@@ -24,7 +25,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         elseif($_GET['action'] == "editar") {$controller -> mostrar_editar();} // Mostrar pantalla de editar mensaje
         elseif($_GET['action'] == "master") {$controller -> mostrar_master();} // Mostrar pantalla de administración
         elseif($_GET['action'] == "activado") {$controller -> mostrar_activado();} // Mostrar pantalla de activación de cuenta
-        elseif($_GET['action'] == "salir") {$controller -> cerrar();} // Mostrar pantalla de activación de cuenta
+        
         
     } 
             
@@ -34,9 +35,21 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     	$controller = new controlador_usuario();
        
        if($_GET['action'] == "crear"){$controller -> crear();}
-       if($_GET['action'] == "login"){$controller -> login();}
-       if($_GET['action'] == "activar") {$controller -> activar_cuenta();}
+       elseif($_GET['action'] == "login"){$controller -> login();}
+       elseif($_GET['action'] == "activar") {$controller -> activar_cuenta();}
+       elseif($_GET['action'] == "salir") {$controller -> cerrar();} // Mostrar pantalla de activación de cuenta
     
+    }
+    
+    
+    /* CONTROLADOR DE POST */
+    elseif ($_GET['controller'] == "post") {
+    	
+    	$controller = new controlador_post();
+    	
+    	if($_GET['action'] == "crear_post"){$controller -> crear_post();}
+    	elseif($_GET['action'] == "comentar"){$controller -> comentar();}
+    	
     }
 } 
 

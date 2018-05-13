@@ -82,15 +82,24 @@ class controlador_usuario
 		elseif($nivelUsuario['nivel'] === '0'){header("Location: index.php?controller=vistas&action=pantalla_login&error2");}
 		elseif($nivelUsuario['nivel'] === '1'){header("Location: index.php?controller=vistas&action=pantalla_login&error3");}
 		else{
+			$iniciarSesion = $userLogin->login();
+			$user_id = $userLogin->get_user_id();
 			if(!isset($_SESSION['user'])){$_SESSION['user'] = $nombre;}
 			if(!isset($_SESSION['cont'])){$_SESSION['cont'] = $password;}
-			$iniciarSesion = $userLogin->login();
+			if(!isset($_SESSION['uid'])){$_SESSION['uid'] = $user_id['id'];}
 			if($iniciarSesion){header("Location: index.php");}
 			else{header("Location: index.php?controller=vistas&action=pantalla_login&error4");}
 		}
 		
 	}
 	
+	
+	public function cerrar()
+	{
+		session_unset();
+		session_destroy();
+		header("Location: index.php");
+	}
 	
 	public function activar_cuenta() 
 	{

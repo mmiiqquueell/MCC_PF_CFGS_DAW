@@ -71,11 +71,21 @@ a {outline: 0 !important; text-decoration: none !important;}
 
 /* TEMAS */
 
+/* usuario */
+.usuario {width: 150px; height: 30px; background-color: #FFF; border: 1px solid black;}
+.u-ban {background-color: #000; color: #FFF !important;}
+.u-bot {background-color: #666; color: #FFF !important;}
+.u-cola {background-color: #0C0; color: #000 !important;}
+.u-mod {background-color: #0AF; color: #FFF !important;}
+.u-admin {background-color: #F80; color: #000 !important;}
+.u-master {background-color: #F00; color: #FF0 !important;}
+.u-del {background-color: #666; color: #AAA !important;}
+
 /* avatar */
-.avatar {width: 100px; height: 100px; background-color: #FFF; border: 1px solid red}
+.avatar {width: 150px; height: 150px; background-color: #FFF; border: 1px solid black}
 
 /* rango */
-.rango {width: 150px; height: 30px; background-color: #F00; border: 1px solid green;}
+.informacion {width: 150px; height: 25px; background-color: #FFF; border: 1px solid black;}
 
 /* borders */
 .RLT {border-top-left-radius: 0.25rem !important;}
@@ -83,10 +93,11 @@ a {outline: 0 !important; text-decoration: none !important;}
 .RLB {border-bottom-left-radius: 0.25rem !important;}
 .RRB {border-bottom-right-radius: 0.25rem !important;}
 
-
 /* Botones links */
 .myweb {width: 32px; height: 26px; background-color: #FF0; border: 1px solid green;}
 .mensajeprivado {width: 32px; height: 26px; background-color: #0F0; border: 1px solid yellow;}
+
+
 
 
 

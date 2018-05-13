@@ -99,11 +99,20 @@ class controlador_vistas {
     	if($post && $mensajes){require_once 'vistas/tema.php';}
     	else{header("Location: vistas/tema.php&error1");}
     }
-    
-    public function cerrar()
+        
+    public function mostrar_responder()
     {
-    	session_unset();
-    	session_destroy();
-    	header("Location: index.php");
+    	$idp = $_GET['idp'];
+    	$obtener_respuesta= new modelo_vistas();
+    	$temas = $obtener_respuesta-> listar_temas();
+    	$obtener_respuesta -> setIdp($idp);
+    	$post = $obtener_respuesta-> mostrar_post();
+    	require_once ("vistas/responder.php");
     }
+    
+    
+    
+    
+    
+    
 }
