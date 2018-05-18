@@ -18,9 +18,9 @@ IMPLEMENTACIÓN BÁSICA:
 
 :heavy_check_mark: Login
 
-:heavy_multiplication_x: Crear post
+:heavy_check_mark: Crear post
 
-:heavy_multiplication_x: Responder mensajes
+:heavy_check_mark: Responder mensajes
 
 :heavy_multiplication_x: Editar mensajes
 

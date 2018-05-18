@@ -14,11 +14,15 @@ class modelo_post{
      * Getters y Setters.
      */
     public function getNombre() {return $this -> nombre;}
-    public function setNombre($nombre) {$this -> nombre = $nombre;}
+    public function setNombre($nombre) {$this -> nombre = $nombre;}    
+    public function getId() {return $this -> id;}
+    public function setId($id) {$this -> id = $id;}
     public function getIdp() {return $this -> idp;}
     public function setIdp($idp) {$this -> idp = $idp;}
     public function getUid() {return $this -> uid;}
-    public function setUid($uid) {$this -> uid = $uid;}
+    public function setUid($uid) {$this -> uid = $uid;}    
+    public function getTitulo() {return $this -> titulo;}
+    public function setTitulo($titulo){$this -> titulo = $titulo;}
     public function getMensaje() {return $this -> mensaje;}
     public function setMensaje($mensaje){$this -> mensaje = $mensaje;}
     
@@ -32,6 +36,25 @@ class modelo_post{
     	$result = $stmt->get_result();
     	if ($this->db->error){return "$sql<br>{$this->db->error}";}
     	else {return false;}
+    }
+    
+    
+    
+    public function crear_tema()
+    {
+    	$stmt = $this->db->prepare("INSERT INTO post (subtema, titulo, mensaje, creador) VALUES ('{$this->idp}',?,?,'{$this->uid}');");
+    	$stmt -> bind_param('ss', $this->titulo, $this->mensaje);
+    	$stmt -> execute();
+    	$result = $stmt->get_result();
+    	if ($this->db->error){return "$sql<br>{$this->db->error}";}
+    	else {return false;}
+    }
+    
+    public function obtener_post()
+    {
+    	$consulta=$this->db->query("SELECT id FROM post WHERE creador = '{$this->uid}' ORDER BY creador DESC LIMIT 1;");
+    	while($filas=$consulta->fetch_assoc()){$this->id=$filas;}
+    	return $this->id;
     }
     
 }

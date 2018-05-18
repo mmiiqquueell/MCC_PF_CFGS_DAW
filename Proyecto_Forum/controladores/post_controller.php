@@ -24,6 +24,25 @@ class controlador_post
 		else{echo "Se ha producido un error al añadir el comentario, por favor intentelo más tarde";}
 	}
 	
+	
+	public function crear_post()
+	{
+		$idst = $_POST['idst'];
+		$idt = $_POST['idt'];
+		$uid = $_SESSION['uid'];
+		$titulo = $_POST['titulo'];
+		$mensaje = $_POST['mensaje'];
+		$crear_post = new modelo_post();
+		$crear_post -> setUid($uid);
+		$crear_post -> setIdp($idst);
+		$crear_post -> setTitulo($titulo);
+		$crear_post -> setMensaje($mensaje);
+		$creado = $crear_post -> crear_tema();
+		$idp = $crear_post -> obtener_post();
+		if(!$creado){header("Location: index.php?controller=vistas&action=tema&idp=".$idp['id']."&idt=".$idt."&idst=".$idst."");}
+		else{echo "Se ha producido un error al añadir el comentario, por favor intentelo más tarde";}
+	}
+	
 }
 
 ?>

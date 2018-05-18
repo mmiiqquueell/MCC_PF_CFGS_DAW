@@ -68,7 +68,7 @@
             		echo ">".$creador."</h5>
                 </div>
                 <div class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
-                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:m:s', strtotime($post['fecha_creacion']))."</span> 
+                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:i:s', strtotime($post['fecha_creacion']))."</span> 
 					<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
 					<a class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
 					<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>
@@ -118,7 +118,7 @@
 		            		echo ">".$usuarioR."</h5>
 		                </div>
 		                <div class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
-		                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:m:s', strtotime($mensajes[$m]['creacion']))."</span> 
+		                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:i:s', strtotime($mensajes[$m]['creacion']))."</span> 
 							<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
 							<a class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
 							<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>

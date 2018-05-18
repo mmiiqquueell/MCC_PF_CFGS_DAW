@@ -47,6 +47,13 @@ class controlador_vistas {
     	require_once ("vistas/login.php");
     }
     
+    public function mostrar_crear_tema()
+    {
+    	$obtener_categorias = new modelo_vistas();
+    	$temas = $obtener_categorias -> listar_temas();
+    	require_once ("vistas/nuevoTema.php");
+    }
+    
     public function mostrar_activado()
     {
     	$obtener_categorias = new modelo_vistas();
