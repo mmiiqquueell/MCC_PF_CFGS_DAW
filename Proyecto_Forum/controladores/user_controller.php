@@ -117,8 +117,31 @@ class controlador_usuario
 		} elseif($validar < '10'){
 			header('Location: index.php?controller=vistas&action=activado&act3');
 		}
-		
-		
+	}
+	
+	
+	public function reenviar_mail()
+	{
+		$mail = $_POST['mail'];
+		$obtener_usuario = new modelo_usuario();
+		$obtener_usuario -> setEmail($mail);
+		$existe = $obtener_usuario -> get_mail();
+		if (!$existe){header("Location: index.php?controller=vistas&action=reenviar&error1");}
+		else{
+			$error = $obtener_usuario -> get_mail2();
+			if ($error['nivel'] != '10'){header("Location: index.php?controller=vistas&action=reenviar&error2");}
+			else {
+				$para      = $mail;
+				$titulo    = 'Activación de cuenta RGF';
+				$mensaje   = 'Su cuenta ha sido creada pero para activarla debe pulsar en este link:' . "\r\n" . "<a href='http://www.mcc-daw.tk/index.php?controller=usuario&action=activar&cd=".$error['validar']."'>Pulsa aquí para activar la cuenta</a>";
+				$cabeceras = 'Content-Type: text/html; charset=UTF-8' . "\r\n" .
+						'From: no-reply@RetroGamingForum.com' . "\r\n" .
+						'Reply-to: no-reply@RetroGamingForum.com' . "\r\n" .
+						'X-Mailer: PHP/' . phpversion();
+				mail($para, $titulo, $mensaje, $cabeceras);
+				header("Location: index.php?controller=vistas&action=reenviar&info1");
+			}
+		}
 	}
 	
 	

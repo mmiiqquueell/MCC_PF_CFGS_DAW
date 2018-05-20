@@ -1,3 +1,7 @@
+/* BOOSTRAP ORIGINAL */
+
+
+
 /* FUENTES DE TEXTO */
 
 /* Fuente creada por Miquel Costa carácter a carácter basada en el juego Super Monaco GP de Sega Master System */
@@ -35,8 +39,16 @@ body {
     margin-bottom: 60px; /* Margen extra para el final de página y que footer no tape la parte inferior */
 }
 
+.border-custom {
+	border: 1px solid #000 !important;
+}
 
-
+.bg-warning-hover {
+	background-color: #FFC107 !important; transition-duration: 2s;
+}
+.bg-warning-hover:hover {
+	background-color: #ffff6a!important; transition-duration: 0.2s;
+}
 
 
 
@@ -62,6 +74,9 @@ body {
 }
 .table-secondary-custom-2 a { 
     font-size: 1em; padding-top:0px;
+}
+.bg-dark-custom {
+    background: linear-gradient(to right, rgba(52,58,64,1), rgba(52,58,64,0));
 }
 
 .btn {padding-top:2px !important}

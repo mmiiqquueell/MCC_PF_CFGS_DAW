@@ -36,7 +36,7 @@
             
             
             <?php 
-            $men = 0; $idst = $_GET['idst']; $idt = $_GET['idt'];
+            $men = 0; $idst = $_GET['idst']; $idt = $_GET['idt']; $cerrado = 0;
             foreach ($tema as $tema){
             	echo "
 					<div class='col-12 row p-0 pb-2 b-transluced pl-lg-0 mx-auto'>
@@ -49,7 +49,7 @@
 					</div>";	
             };
             
-            foreach($post as $cuestiones) { 
+            foreach($post as $cuestiones) { $cerrado = $cuestiones['cerrado'];
             	for($n = 0; $n < count($usuarios); $n++){ // Muestra el nombre del creador de POST debajo del titulo
             		if($cuestiones['creador'] == $usuarios[$n]['id']){$creador = $usuarios[$n]['nombre'];}
             	}
@@ -84,14 +84,14 @@
             	// Se dibuja la lista de mensajes.
             	echo "
 				<div class='col-12 row b-transluced p-0 pl-lg-0 pb-1 mx-auto'>
-	                <a href='index.php?controller=vistas&action=tema&idp=".$idp."&idt=".$idt."&idst=".$idst."' class='rounded-left col-7 border bg-white pb-0'>
+	                <a href='index.php?controller=vistas&action=tema&idp=".$idp."&idt=".$idt."&idst=".$idst."' class='rounded-left col-7 border "; if($cerrado == 1) {echo "bg-secondary text-white";} else {echo "bg-white";} echo " pb-0'>
 	                    <span class='mb-0 text-bold'>".$cuestiones['titulo']."</span><br>
 						<span>Por ".$creador."</span>
 	                </a>
-	                <div class='col-2 border bg-white text-center'>
+	                <div class='col-2 border "; if($cerrado == 1) {echo "bg-secondary text-white";} else {echo "bg-white";} echo " text-center'>
 	                    <h2 class='p-0'>".$men."</h2>
 	                </div>
-	                <div class='rounded-right col-3 border bg-white p-0 p-1'>
+	                <div class='rounded-right col-3 border "; if($cerrado == 1) {echo "bg-secondary text-white";} else {echo "bg-white";} echo " p-0 p-1'>
 	                    <span>Por ".$escritor."<br>El ".date('d/m/Y H:i:s', strtotime($fecha))."</span>
 	                </div>
 	            </div>"; $men = 0;

@@ -25,6 +25,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         elseif($_GET['action'] == "editar") {$controller -> mostrar_editar();} // Mostrar pantalla de editar mensaje
         elseif($_GET['action'] == "master") {$controller -> mostrar_master();} // Mostrar pantalla de administración
         elseif($_GET['action'] == "activado") {$controller -> mostrar_activado();} // Mostrar pantalla de activación de cuenta
+        elseif($_GET['action'] == "reenviar") {$controller -> mostrar_reactivado();} // Mostrar pantalla para reenviar email de activación de cuenta
         
         
     } 
@@ -37,7 +38,8 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
        if($_GET['action'] == "crear"){$controller -> crear();}
        elseif($_GET['action'] == "login"){$controller -> login();}
        elseif($_GET['action'] == "activar") {$controller -> activar_cuenta();}
-       elseif($_GET['action'] == "salir") {$controller -> cerrar();} // Mostrar pantalla de activación de cuenta
+       elseif($_GET['action'] == "resendmail") {$controller -> reenviar_mail();}
+       elseif($_GET['action'] == "salir") {$controller -> cerrar();} 
     
     }
     

@@ -57,5 +57,12 @@ class modelo_post{
     	return $this->id;
     }
     
+    public function obtener_mensaje()
+    {
+    	$consulta=$this->db->query("SELECT id FROM mensajes WHERE usuario = '{$this->uid}' ORDER BY usuario DESC LIMIT 1;");
+    	while($filas=$consulta->fetch_assoc()){$this->id=$filas;}
+    	return $this->id;
+    }
+    
 }
     

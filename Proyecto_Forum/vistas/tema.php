@@ -26,31 +26,34 @@
          
          <?php 
          
-         $men = 0; $idst = $_GET['idst']; $total_men = 0;
+         $men = 0; $idst = $_GET['idst']; $total_men = 0; $cerrado = 0;
          $_SESSION['idp'] = $_GET['idp']; $_SESSION['idt'] = $_GET['idt']; $_SESSION['idst'] = $_GET['idst'];
-            foreach ($tema as $tema){
+         
+         for ($u = 0; $u < count($usuarios); $u++){
+         	if($post['creador'] == $usuarios[$u]['id']) {$creador = $usuarios[$u]['nombre']; $registroC = $usuarios[$u]['registro']; $nivelC = $usuarios[$u]['nivel']; $cerrado = $post['cerrado'];
+         	for($i = 0; $i < count($preferencias); $i++){
+         		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
+         	}
+         	for($j = 0; $j < count($MSG); $j++){
+         		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
+         	}
+         	}
+         	
+         }
+         foreach ($tema as $tema){
             	echo "
 					<div class='col-12 row p-0 pb-2 b-transluced pl-lg-0 mx-auto'>
 		                <div class='rounded mb-2 col-12 bg-warning-custom'>
-		                    <h3 class='font-weight-bold'><a href='index.php?controller=vistas&action=indica&id=".$tema['id']."'>".$tema['nombre']."</a> > ".$subtema['categoria']."</h3>
+		                    <h3 class='font-weight-bold'><a href='index.php?controller=vistas&action=indica&id=".$tema['id']."'>".$tema['nombre']."</a> > <a href='index.php?controller=vistas&action=subindice&idst=".$_GET['idst']."&idt=".$_GET['idt']."'>".$subtema['categoria']."</a></h3>
 		                </div>
-		                <div class='rounded col-12 bg-info-custom text-light'>
-		                    <h4 class='font-weight-bold'>".$post['titulo']."</h4>
+		                <div class='rounded col-12 "; if($cerrado == 1) {echo "bg-dark-custom text-white";} else {echo "bg-info-custom";} echo " text-light'>
+		                    <h4 class='font-weight-bold'>".$post['titulo']; if($cerrado == 1) {echo " > (TEMA CERRADO)";} echo "</h4>
 		                </div>
 		                
 		            </div>";	
             };
-            for ($u = 0; $u < count($usuarios); $u++){
-            	if($post['creador'] == $usuarios[$u]['id']) {$creador = $usuarios[$u]['nombre']; $registroC = $usuarios[$u]['registro']; $nivelC = $usuarios[$u]['nivel'];
-	            	for($i = 0; $i < count($preferencias); $i++){
-	            		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
-	            	}
-	            	for($j = 0; $j < count($MSG); $j++){
-	            		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
-	            	}
-            	}
-            	
-            }
+            
+            
             
             
             echo "
@@ -83,7 +86,7 @@
                     <!-- <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div> -->
                 </div>
                 <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
-                    <p class='col-12 mt-2 mb-2 p-3 mb-0 border rounded bg-white'>".$post['mensaje']."</p>
+                    <p class='col-12 mt-2 mb-2 p-3 mb-0 border rounded bg-white'>".nl2br($post['mensaje'])."</p>
                     <!--p class='col-12 p-1 border my-auto rounded bg-white text-center'><img src='https://badges.steamprofile.com/profile/default/steam/76561197984336021.png' title='Firma de usuario' /></p-->
                 </div>
             </div>
@@ -117,7 +120,7 @@
 					            else{ echo "' data-toggle='tooltip' data-placement='bottom' title='Usuario'";}
 		            		echo ">".$usuarioR."</h5>
 		                </div>
-		                <div class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
+		                <div id=".$mensajes[$m]['id']." class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
 		                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:i:s', strtotime($mensajes[$m]['creacion']))."</span> 
 							<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
 							<a class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
@@ -132,7 +135,7 @@
 		                    <!-- <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div> -->
 		                </div>
 		                <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
-		                    <p class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".$mensajes[$m]['mensaje']."</p>
+		                    <p class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".nl2br($mensajes[$m]['mensaje'])."</p>
 		                </div>
 		            </div>"; 
 	            }
@@ -148,7 +151,12 @@
             </div>
             <div class='col-6 p-0 b-transluced m-auto text-right'>
                 <a class="col-5 text-dark btn btn-warning">VOLVER AL INDICE</a>
-                <a <?php if(isset($_SESSION['user'])){echo "href='index.php?controller=vistas&action=responder&idp=".$_GET['idp']."'";} else{echo "href='index.php?controller=vistas&action=pantalla_login'";}  ?>class="col-5 text-white btn btn-primary">RESPONDER</a>
+                <?php 
+                if($cerrado == '0'){
+                	if(isset($_SESSION['user'])){echo "<a href='index.php?controller=vistas&action=responder&idp=".$_GET['idp']."'class='col-5 text-white btn btn-primary'>RESPONDER</a>";} 
+                	else{echo "<a href='index.php?controller=vistas&action=pantalla_login' class='col-5 text-white btn btn-primary'>RESPONDER</a>";} 
+                } else {echo "<span class='col-5 text-white btn btn-dark'>CERRADO</span>";}
+                ?>
             </div>
         </main>   
         <?php include "footer.php"; ?>

@@ -49,7 +49,7 @@ class modelo_vistas{
      */
     public function listar_temas()
     {
-    	$consulta=$this->db->query("SELECT * FROM temas ORDER BY nombre ASC;");
+    	$consulta=$this->db->query("SELECT * FROM temas ORDER BY id ASC;");
     	while($filas=$consulta->fetch_assoc()){$this->temas[]=$filas;}
     	return $this->temas;
     }

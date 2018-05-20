@@ -78,6 +78,17 @@ class modelo_usuario{
     	if ($result -> num_rows > 0) {return true;}
     	else {return false;}
     }
+    
+    /**
+     * 
+     * @return unknown
+     */
+    public function get_mail2()
+    {
+    	$consulta=$this->db->query("SELECT mail, nivel, validar FROM usuarios WHERE mail = '{$this->email}';");
+    	while($filas=$consulta->fetch_assoc()){$this->email=$filas;}
+    	return $this->email;
+    }
         
     /**
      * Comprueba el nivel del usuario.

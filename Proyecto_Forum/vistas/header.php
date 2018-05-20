@@ -44,11 +44,11 @@ $(document).ready(function(){
         <?php
             foreach ($temas as $categorias){
             echo "
-                <a data-toggle='tooltip' data-placement='bottom' title='Mostrar solo temas de ".$categorias['nombre']."' class='col-1 text-center rounded bg-warning p-1 pb-2 mx-auto' href='index.php?controller=vistas&action=indica&id=".$categorias['id']."'>
-					<li>
+                <li class='col-2 row m-0 p-0 mx-auto rounded bg-warning-hover border-custom'>
+					<a data-toggle='tooltip' data-placement='bottom' title='Mostrar solo temas de ".$categorias['nombre']."' class='col-12 p-0 pb-1 text-center' href='index.php?controller=vistas&action=indica&id=".$categorias['id']."'>
                    		<span class='font-weight-bold text-dark'>".$categorias['nombre']."</span>
-                	</li>
-				</a>";}
+					</a>
+				</li>";}
 		    ?>
         </ul>
     </nav>

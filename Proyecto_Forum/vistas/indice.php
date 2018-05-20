@@ -23,7 +23,7 @@
         <div id="filtro" class="filtro"></div>
         <main class="mt-3 col-12 b-transluced text-dark p-0 text-left">
             <div class='col-12 row p-0 pb-3 b-transluced text-center mx-auto'>
-                <div class='rounded-left col-7 border bg-white pb-1'>
+                <div class='rounded-left col-6 border bg-white pb-1'>
                     <span>SECCIONES</span>
                 </div>
                 <div class='col-1 border bg-white'>
@@ -32,12 +32,12 @@
                 <div class='col-1 border bg-white'>
                     <span>MSG</span>
                 </div>
-                <div class='rounded-right col-3 border bg-white'>
-                    <span>ÚLTIMO MENSAJE</span>
+                <div class='rounded-right col-4 border bg-white'>
+                    <span>TEMA ACTUAL</span>
                 </div>
             </div>
             <?php 
-            $a = null; $post = 0; $totalmsg = 0;
+            $a = null; $post = 0; $totalmsg = 0; $nombre_post; $creador_post; $fecha_post = "0000-00-00 00:00:00";
             foreach ($temas as $temas){
             	if ($a != $temas['nombre']){
 		            echo "<div class='col-12 row p-0 pb-2 pt-3 b-transluced pl-lg-0 mx-auto'>
@@ -50,15 +50,23 @@
 		 		for ($i = 0; $i < count($subtemas); $i++ ){
 					if($temas['id'] == $subtemas[$i]['padre']){
 						for($p = 0; $p < count($contapost); $p++){
-							if($subtemas[$i]['id'] == $contapost[$p]['subtema']){$post++;
+							if($subtemas[$i]['id'] == $contapost[$p]['subtema']){  $fecha_post = $contapost[$p]['fecha_creacion'];
+								$post++;
 								for($m = 0; $m < count($MSGT); $m++){
 									if($subtemas[$i]['id'] == $contapost[$p]['subtema'] && $contapost[$p]['id'] == $MSGT[$m]['post']){$totalmsg++;}
+									if($subtemas[$i]['id'] == $contapost[$p]['subtema'] && $contapost[$p]['id'] == $MSGT[$m]['post'] && $MSGT[$m]['creacion'] > $fecha_post){
+										$fecha_post = $MSGT[$m]['creacion']; 
+										for($u = 0; $u < count($usuarios); $u++){
+											if($usuarios[$u]['id'] == $MSGT[$m]['usuario']) {$creador_post = $usuarios[$u]['nombre'];}
+										}
+									}
 								}
+								$nombre_post = $contapost[$p]['titulo'];
 							}
 						}
 						 
 		            echo "<div class='col-12 row b-transluced p-0 pl-lg-0 pb-1 mx-auto'>
-		            	<a href='index.php?controller=vistas&action=subindice&idst=".$subtemas[$i]['id']."&idt=".$temas['id']."' class='rounded-left col-7 border bg-white pb-2'>
+		            	<a href='index.php?controller=vistas&action=subindice&idst=".$subtemas[$i]['id']."&idt=".$temas['id']."' class='rounded-left col-6 border bg-white pb-2'>
 				            <span>".$subtemas[$i]['categoria']."</span><br>
 				            <span>".$subtemas[$i]['descripcion']."</span>
 		            	</a>
@@ -68,9 +76,9 @@
 			            <div class='col-1 border bg-white text-center'>
 			            	<h2>".$totalmsg."</h2>
 			            </div>
-				        <div class='rounded-right col-3 border bg-white pb-2'>
-				            <span>Consola no enciende</span><br>
-				            <span>Mike a las 16:35</span>
+				        <div class='rounded-right col-4 border bg-white pb-2'>
+				            <span>".$nombre_post."</span><br>
+				            <span>Por ".$creador_post." el ".date('d/m/Y H:i:s', strtotime($fecha_post))."</span>
 			            </div>
 		            </div>";} $post = 0; $totalmsg = 0;
 				}

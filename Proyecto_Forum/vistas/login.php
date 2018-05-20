@@ -41,8 +41,9 @@
                 <input class="btn btn-primary text-white" type="submit" name="submit" value="iniciar sesión" />
             </form>
             
-            <p class="table-secondary-custom-2 rounded mt-3 text-white">¿No tiene cuenta? Pulse <a class="btn btn-warning text-dark badge" href="index.php?controller=vistas&action=registrar">aquí</a> para crear una.</p>
+            <p class="table-secondary-custom-2 rounded mt-3 text-white">¿No tiene cuenta? Pulse <a class="btn btn-warning text-dark badge" href="index.php?controller=vistas&action=registrar">aquí</a> para crear una cuenta de nueva.</p>
             <p class="table-secondary-custom-2 rounded mt-3 text-white">¿Ha olvidado su contraseña? Pulse <a class="btn btn-light text-dark badge" href="#">aquí</a> para restablecer su contraseña.</p>
+            <p class="table-secondary-custom-2 rounded mt-3 text-white">¿No ha recivido el mail de activación? Pulse <a class="btn btn-success text-light badge" href="index.php?controller=vistas&action=reenviar">aquí</a> para reenviar un mail de activación.</p>
            	<p id="aviso2" class="alert alert-danger" role="alert">
 				<?php // Código PHP que muestra diferentes errores según valor devuelto por controlador a la base de datos //
 					if (isset($_GET['error1'])) {

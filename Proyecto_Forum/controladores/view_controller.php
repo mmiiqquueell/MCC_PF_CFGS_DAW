@@ -18,6 +18,7 @@ class controlador_vistas {
     	$subtemas = $obtener_temas -> listar_subtemas();
     	$contapost = $obtener_temas -> contador_post();
     	$MSGT = $obtener_temas -> contador_mensajes_totales();
+    	$usuarios = $obtener_temas -> get_user();
     	if($temas && $subtemas && $contapost && $MSGT){require_once 'vistas/indice.php';}
         else{header("Location: vistas/indice.php&error1");}
     }
@@ -60,6 +61,14 @@ class controlador_vistas {
     	$temas = $obtener_categorias-> listar_temas();
     	require_once ("vistas/activado.php");
     }
+    
+    public function mostrar_reactivado()
+    {
+    	$obtener_categorias = new modelo_vistas();
+    	$temas = $obtener_categorias-> listar_temas();
+    	require_once ("vistas/reactivar.php");
+    }
+    
     
     
     public function registrar()
