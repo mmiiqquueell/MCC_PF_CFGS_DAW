@@ -21,6 +21,9 @@ class controlador_post
 		$responder_post -> setMensaje($mensaje);
 		$contestar = $responder_post -> responder_mensaje();
 		$identificador = $responder_post -> obtener_mensaje();
+		$fechas = $responder_post -> obtener_fecha_mensaje();
+		$responder_post -> setFecha($fechas['creacion']);
+		$actualizado = $responder_post->actualizar_fecha();
 		if(!$contestar){header("Location: index.php?controller=vistas&action=tema&idp=".$_SESSION['idp']."&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."#".$identificador['id']."");}
 		else{echo "Se ha producido un error al añadir el comentario, por favor intentelo más tarde";}
 	}

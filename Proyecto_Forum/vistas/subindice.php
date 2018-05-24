@@ -49,7 +49,10 @@
 					</div>";	
             };
             
-            foreach($post as $cuestiones) { $cerrado = $cuestiones['cerrado'];
+            
+            foreach($post as $cuestiones) { 
+            	$cerrado = $cuestiones['cerrado']; // obtiene información del tema si está cerrado o abierto
+            	$pin = $cuestiones['pin'];
             	for($n = 0; $n < count($usuarios); $n++){ // Muestra el nombre del creador de POST debajo del titulo
             		if($cuestiones['creador'] == $usuarios[$n]['id']){$creador = $usuarios[$n]['nombre'];}
             	}
@@ -62,8 +65,9 @@
             	
             	for($i = 0; $i < count($MSG); $i++){ // Muestra la cantidad de mensajes totales de cada post
             		if($cuestiones['id'] == $MSG[$i]['post']){$men++;}    
-            	}
-            	$fecha = '0000-00-00 00:00:00'; // Reset de la fecha
+            	}            	
+            	
+            	$fecha = '2000-01-01 00:00:00'; // Reset de la fecha
             	for($i = 0; $i < count($MSG); $i++){ // Muestra el creador y fecha del último comentario si hay mensajes en el tema.
             		for($u = 0; $u < count($usuarios); $u++){
             			if($cuestiones['id'] == $MSG[$i]['post']){
@@ -84,14 +88,14 @@
             	// Se dibuja la lista de mensajes.
             	echo "
 				<div class='col-12 row b-transluced p-0 pl-lg-0 pb-1 mx-auto'>
-	                <a href='index.php?controller=vistas&action=tema&idp=".$idp."&idt=".$idt."&idst=".$idst."' class='rounded-left col-7 border "; if($cerrado == 1) {echo "bg-secondary text-white";} else {echo "bg-white";} echo " pb-0'>
+	                <a href='index.php?controller=vistas&action=tema&idp=".$idp."&idt=".$idt."&idst=".$idst."' class='rounded-left col-7 border "; if($cerrado == 1 && $pin == 1 || $cerrado == 1 && $pin == 0) {echo "table-dark text-white";} elseif($cerrado == 0 && $pin == 1) {echo "table-warning text-dark";} else {echo "bg-white text-dark";} echo " pb-0'>
 	                    <span class='mb-0 text-bold'>".$cuestiones['titulo']."</span><br>
 						<span>Por ".$creador."</span>
 	                </a>
-	                <div class='col-2 border "; if($cerrado == 1) {echo "bg-secondary text-white";} else {echo "bg-white";} echo " text-center'>
+	                <div class='col-2 border "; if($cerrado == 1 && $pin == 1 || $cerrado == 1 && $pin == 0) {echo "table-dark text-white";} elseif($cerrado == 0 && $pin == 1) {echo "table-warning text-dark";} else {echo "bg-white text-dark";} echo " text-center'>
 	                    <h2 class='p-0'>".$men."</h2>
 	                </div>
-	                <div class='rounded-right col-3 border "; if($cerrado == 1) {echo "bg-secondary text-white";} else {echo "bg-white";} echo " p-0 p-1'>
+	                <div class='rounded-right col-3 border "; if($cerrado == 1 && $pin == 1 || $cerrado == 1 && $pin == 0) {echo "table-dark text-white";} elseif($cerrado == 0 && $pin == 1) {echo "table-warning text-dark";} else {echo "bg-white text-dark";} echo " p-0 p-1'>
 	                    <span>Por ".$escritor."<br>El ".date('d/m/Y H:i:s', strtotime($fecha))."</span>
 	                </div>
 	            </div>"; $men = 0;

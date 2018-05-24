@@ -94,7 +94,7 @@ class modelo_vistas{
     
     public function mostrar_posts()
     {
-    	$consulta=$this->db->query("SELECT * FROM post WHERE subtema = '{$this->idst}';");
+    	$consulta=$this->db->query("SELECT * FROM post WHERE subtema = '{$this->idst}' ORDER BY pin DESC, ultima_fecha DESC;");
     	while($filas=$consulta->fetch_assoc()){$this->subtemas[]=$filas;}
     	return $this->subtemas;
     }

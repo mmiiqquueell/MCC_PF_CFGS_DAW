@@ -25,6 +25,8 @@ class modelo_post{
     public function setTitulo($titulo){$this -> titulo = $titulo;}
     public function getMensaje() {return $this -> mensaje;}
     public function setMensaje($mensaje){$this -> mensaje = $mensaje;}
+    public function getFecha() {return $this -> fecha;}
+    public function setFecha($fecha){$this -> fecha = $fecha;}
     
     
     
@@ -38,7 +40,21 @@ class modelo_post{
     	else {return false;}
     }
     
+    public function obtener_fecha_mensaje()
+    {
+    	$consulta=$this->db->query("SELECT creacion FROM mensajes WHERE post = '{$this->idp}' AND usuario = '".$_SESSION['uid']."' ORDER BY creacion DESC LIMIT 1;");
+    	while($filas=$consulta->fetch_assoc()){$this->fecha=$filas;}
+    	return $this->fecha;
+    }
     
+    
+    public function actualizar_fecha()
+    {
+    	$sql = "UPDATE post SET ultima_fecha = '{$this->fecha}' WHERE id = '{$this->idp}';";
+    	$result = $this->db->query($sql);
+    	if ($result){return true;}
+    	else {return false;}
+    }
     
     public function crear_tema()
     {

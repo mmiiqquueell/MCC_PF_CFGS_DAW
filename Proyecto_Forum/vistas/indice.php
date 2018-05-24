@@ -15,6 +15,14 @@
                 if (activo) {filtro.style.transition = "1s"; filtro.style.opacity = "0"; activo = false;}
                 else {filtro.style.transition = "1s"; filtro.style.opacity = "0.2"; activo = true;}
             }	
+
+
+            setTimeout(function(){alert("¡ATENCIÓN!: \n\nEsta página está en desarrollo por lo que es posible que tu cuenta de usuario y " +
+                "temas sea eliminada por posibles cambios en la base de datos, por favor, para evitar perder el tiempo no crees " +
+                "nuevo usuario o temas/respuestas hasta el día 8 de Junio donde el servidor dejara de ser modificado. Ten en cuenta " +
+                "que esto es un proyecto final de curso por lo que muchos apartados siguen sin funcionar. Afradeceria que no hicieras " +
+                "spam o colgaras enlaces no autorizados. Para los profesores si desean hacer pruebas pueden realizar las que quieran, tengan " +
+                "en cuenta el apartado de GIT para saber que funciona y no funciona");},1000);
 		}
 	</script>
     <body class="container p-0">
@@ -37,7 +45,7 @@
                 </div>
             </div>
             <?php 
-            $a = null; $post = 0; $totalmsg = 0; $nombre_post; $creador_post; $fecha_post = "0000-00-00 00:00:00";
+            $a = null; $post = 0; $totalmsg = 0; $nombre_post; $creador_post; $fecha_post;
             foreach ($temas as $temas){
             	if ($a != $temas['nombre']){
 		            echo "<div class='col-12 row p-0 pb-2 pt-3 b-transluced pl-lg-0 mx-auto'>
@@ -45,23 +53,37 @@
 		                    <a href='index.php?controller=vistas&action=indica&id=".$temas['id']."'><h3 class='font-weight-bold text-dark'>".$temas['nombre']."</h3></a>
 		                </div>
 		            </div>";
-		            $a = $temas['nombre']; }
+		            $a = $temas['nombre']; 
+            	}
 		 
-		 		for ($i = 0; $i < count($subtemas); $i++ ){
+            	for ($i = 0; $i < count($subtemas); $i++){$fecha_post = "2000-01-01 00:00:00";
+			    	
 					if($temas['id'] == $subtemas[$i]['padre']){
 						for($p = 0; $p < count($contapost); $p++){
-							if($subtemas[$i]['id'] == $contapost[$p]['subtema']){  $fecha_post = $contapost[$p]['fecha_creacion'];
+							
+							if($subtemas[$i]['id'] == $contapost[$p]['subtema']){ 
+								if($contapost[$p]['ultima_fecha'] > $fecha_post){ 
+									$fecha_post = $contapost[$p]['ultima_fecha']; $nombre_post = $contapost[$p]['titulo'];
+									for($u = 0; $u < count($usuarios); $u++){
+										if($usuarios[$u]['id'] == $contapost[$p]['creador']) {
+											$creador_post = $usuarios[$u]['nombre']; 
+										}
+									}
+								}
 								$post++;
+								
 								for($m = 0; $m < count($MSGT); $m++){
 									if($subtemas[$i]['id'] == $contapost[$p]['subtema'] && $contapost[$p]['id'] == $MSGT[$m]['post']){$totalmsg++;}
 									if($subtemas[$i]['id'] == $contapost[$p]['subtema'] && $contapost[$p]['id'] == $MSGT[$m]['post'] && $MSGT[$m]['creacion'] > $fecha_post){
 										$fecha_post = $MSGT[$m]['creacion']; 
-										for($u = 0; $u < count($usuarios); $u++){
-											if($usuarios[$u]['id'] == $MSGT[$m]['usuario']) {$creador_post = $usuarios[$u]['nombre'];}
+										for($u2 = 0; $u2 < count($usuarios); $u2++){
+											if($usuarios[$u2]['id'] == $MSGT[$m]['usuario']) {
+												$creador_post = $usuarios[$u2]['nombre'];
+											}
 										}
 									}
 								}
-								$nombre_post = $contapost[$p]['titulo'];
+								
 							}
 						}
 						 
