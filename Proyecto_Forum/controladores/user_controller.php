@@ -83,11 +83,13 @@ class controlador_usuario
 		elseif($nivelUsuario['nivel'] === '1'){header("Location: index.php?controller=vistas&action=pantalla_login&error3");}
 		else{
 			$iniciarSesion = $userLogin->login();
-			$user_id = $userLogin->get_user_id();
-			if(!isset($_SESSION['user'])){$_SESSION['user'] = $nombre;}
-			if(!isset($_SESSION['cont'])){$_SESSION['cont'] = $password;}
-			if(!isset($_SESSION['uid'])){$_SESSION['uid'] = $user_id['id'];}
-			if($iniciarSesion){header("Location: index.php");}
+			if($iniciarSesion){
+				$user_id = $userLogin->get_user_id();
+				if(!isset($_SESSION['user'])){$_SESSION['user'] = $nombre;}
+				if(!isset($_SESSION['cont'])){$_SESSION['cont'] = $password;}
+				if(!isset($_SESSION['uid'])){$_SESSION['uid'] = $user_id['id'];}
+				header("Location: index.php");
+			}
 			else{header("Location: index.php?controller=vistas&action=pantalla_login&error4");}
 		}
 		
