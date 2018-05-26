@@ -120,6 +120,13 @@ class modelo_vistas{
     	return $this->post;
     }
     
+    public function mostrar_editarR()
+    {
+    	$consulta=$this->db->query("SELECT * FROM mensajes WHERE id = '{$this->id}';");
+    	while($filas=$consulta->fetch_assoc()){$this->msg=$filas;}
+    	return $this->msg;
+    }
+    
     public function mostrar_mensajes()
     {
     	$consulta=$this->db->query("SELECT * FROM mensajes;");

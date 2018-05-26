@@ -72,9 +72,14 @@
                 </div>
                 <div class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
                     <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:i:s', strtotime($post['fecha_creacion']))."</span> 
-					<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
-					<a class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
-					<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>
+					<a class='col-1 btn btn-primary badge text-white'>CITAR</a>";
+            		if(isset($_SESSION['uid']) && $_SESSION['uid'] == $post['creador']){
+						echo "<a href='index.php?controller=vistas&action=editarTema&idp=".$_GET['idp']."&idt=".$_GET['idt']."&idst=".$_GET['idst']."' class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
+						<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>";}
+					else{
+						echo "<a class='col-1 btn btn-secondary badge text-dark'>EDITAR</a>
+						<a class='col-1 btn btn-secondary badge text-dark'>ELIMINAR</a>";}
+					echo "
                 </div>
                 <div class='RLB col-2 pb-3 bg-warning text-center'>
                     <img class='mx-auto mb-2 rounded avatar' src='images/avatares/".$avatar."'/>
@@ -121,10 +126,15 @@
 		            		echo ">".$usuarioR."</h5>
 		                </div>
 		                <div id=".$mensajes[$m]['id']." class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
-		                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:i:s', strtotime($mensajes[$m]['creacion']))."</span> 
-							<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
-							<a class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
-							<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>
+		                    <span class='table-secondary-custom rounded col-9'>Respondido el "; echo date('d/m/Y H:i:s', strtotime($mensajes[$m]['creacion'])); if(is_null($mensajes[$m]['modificado'])){} else{ echo " - Editado el ".date('d/m/Y H:i:s', strtotime($mensajes[$m]['modificado']));} echo "</span> 
+							<a class='col-1 btn btn-primary badge text-white'>CITAR</a>";
+							if(isset($_SESSION['uid']) && $_SESSION['uid'] == $mensajes[$m]['usuario']){
+								echo "<a href='index.php?controller=vistas&action=editar&idp=".$_GET['idp']."&mid=".$mensajes[$m]['id']."' class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
+								<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>";}
+							else{
+								echo "<a class='col-1 btn btn-secondary badge text-dark'>EDITAR</a>
+								<a class='col-1 btn btn-secondary badge text-dark'>ELIMINAR</a>";}
+							echo "
 		                </div>
 		                <div class='RLB col-2 pb-3 bg-warning text-center'>
 							<img class='mx-auto mb-2 rounded avatar' src='images/avatares/".$avatar."'/>

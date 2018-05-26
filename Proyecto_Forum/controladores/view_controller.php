@@ -55,6 +55,17 @@ class controlador_vistas {
     	require_once ("vistas/nuevoTema.php");
     }
     
+    public function mostrar_editar_tema()
+    {
+    	$idp = $_GET['idp'];
+    	
+    	$obtener_categorias = new modelo_vistas();
+    	$temas = $obtener_categorias -> listar_temas();
+    	$obtener_categorias -> setIdp($idp);
+    	$post = $obtener_categorias-> mostrar_post();
+    	require_once ("vistas/editarP.php");
+    }
+    
     public function mostrar_activado()
     {
     	$obtener_categorias = new modelo_vistas();
@@ -124,6 +135,20 @@ class controlador_vistas {
     	$obtener_respuesta -> setIdp($idp);
     	$post = $obtener_respuesta-> mostrar_post();
     	require_once ("vistas/responder.php");
+    }
+    
+    
+    public function mostrar_editarR()
+    {
+    	$idp = $_GET['idp'];
+    	$mid = $_GET['mid'];
+    	$obtener_respuesta= new modelo_vistas();
+    	$temas = $obtener_respuesta-> listar_temas();
+    	$obtener_respuesta -> setId($mid);
+    	$obtener_respuesta -> setIdp($idp);
+    	$mensaje = $obtener_respuesta-> mostrar_editarR();
+    	$post = $obtener_respuesta-> mostrar_post();
+    	require_once ("vistas/editarR.php");
     }
     
     

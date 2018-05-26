@@ -21,8 +21,9 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         elseif($_GET['action'] == "registrar") {$controller -> registrar();} // Mostrar pantalla de registro
         elseif($_GET['action'] == "perfil") {$controller -> mostrar_perfil();} // Mostrar pantalla de perfil
         elseif($_GET['action'] == "nuevoTema") {$controller -> mostrar_crear_tema();} // Mostrar pantalla de nuevo tema
+        elseif($_GET['action'] == "editarTema") {$controller -> mostrar_editar_tema();} // Mostrar pantalla de editar temas
         elseif($_GET['action'] == "responder") {$controller -> mostrar_responder();} // Mostrar pantalla de responder tema
-        elseif($_GET['action'] == "editar") {$controller -> mostrar_editar();} // Mostrar pantalla de editar mensaje
+        elseif($_GET['action'] == "editar") {$controller -> mostrar_editarR();} // Mostrar pantalla de editar mensaje
         elseif($_GET['action'] == "master") {$controller -> mostrar_master();} // Mostrar pantalla de administración
         elseif($_GET['action'] == "activado") {$controller -> mostrar_activado();} // Mostrar pantalla de activación de cuenta
         elseif($_GET['action'] == "reenviar") {$controller -> mostrar_reactivado();} // Mostrar pantalla para reenviar email de activación de cuenta
@@ -50,7 +51,9 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     	$controller = new controlador_post();
     	
     	if($_GET['action'] == "crear_post"){$controller -> crear_post();}
+    	if($_GET['action'] == "editar_post"){$controller -> editar_post();}
     	elseif($_GET['action'] == "comentar"){$controller -> comentar();}
+    	elseif($_GET['action'] == "editarComentario"){$controller -> editarMensaje();}
     	
     }
 } 

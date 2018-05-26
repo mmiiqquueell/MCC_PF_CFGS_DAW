@@ -22,9 +22,9 @@ IMPLEMENTACIÓN BÁSICA:
 
 :heavy_check_mark: Responder mensajes
 
-:heavy_multiplication_x: Editar mensajes
+:heavy_check_mark: Editar temas
 
-:heavy_multiplication_x: Mostrar estadísticas de usuario
+:heavy_check_mark: Editar mensajes
 
 :heavy_multiplication_x: Modelo adaptativo (Responsive)
 
@@ -35,17 +35,19 @@ IMPLEMENTACIÓN EXTRA:
 ----------------------------------------------------------------------------------------------------------
 :heavy_check_mark: Seguridad cifrado SHA-512
 
+:heavy_check_mark: Limpieza de campos
+
 :heavy_check_mark: Validación de email
 
-:heavy_multiplication_x: Poner y mostrar avatar
+:heavy_multiplication_x: Mostrar estadísticas de usuario
 
-:heavy_multiplication_x: Poner y mostrar firma
+:heavy_multiplication_x: Poner / mostrar avatar y firma
 
 :heavy_multiplication_x: Mensajería privada
 
 :heavy_multiplication_x: Ajustes de la cuenta (Mensajes por post, orden, botones, etc...)
 
-:heavy_multiplication_x: Mandar mensajes con estilos (Negrita, cursiva, tamaño, fuente, links, vídeos, imágenes, etc...)
+:heavy_multiplication_x: Mensajes con estilos (Negrita, cursiva, tamaño, fuente, links, vídeos, imágenes, etc...)
 
 :heavy_multiplication_x: Temas visuales
 

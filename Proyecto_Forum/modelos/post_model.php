@@ -32,8 +32,18 @@ class modelo_post{
     
     public function responder_mensaje()
     {
-    	$stmt = $this->db->prepare("INSERT INTO mensajes (usuario, mensaje, post) VALUES ('{$this->uid}',?,'{$this->idp}');");
+    	$stmt = $this->db->prepare("INSERT INTO mensajes (usuario, mensaje, post, modificado) VALUES ('{$this->uid}',?,'{$this->idp}', NULL);");
     	$stmt -> bind_param('s', $this->mensaje); 
+    	$stmt -> execute();
+    	$result = $stmt->get_result();
+    	if ($this->db->error){return "$sql<br>{$this->db->error}";}
+    	else {return false;}
+    }
+    
+    public function editar_mensaje()
+    {
+    	$stmt = $this->db->prepare("UPDATE mensajes SET mensaje = ? WHERE usuario = '{$this->uid}' AND post = '{$this->idp}' AND id = '{$this->id}';");
+    	$stmt -> bind_param('s', $this->mensaje);
     	$stmt -> execute();
     	$result = $stmt->get_result();
     	if ($this->db->error){return "$sql<br>{$this->db->error}";}
@@ -43,6 +53,13 @@ class modelo_post{
     public function obtener_fecha_mensaje()
     {
     	$consulta=$this->db->query("SELECT creacion FROM mensajes WHERE post = '{$this->idp}' AND usuario = '".$_SESSION['uid']."' ORDER BY creacion DESC LIMIT 1;");
+    	while($filas=$consulta->fetch_assoc()){$this->fecha=$filas;}
+    	return $this->fecha;
+    }
+    
+    public function obtener_fecha_editar_mensaje()
+    {
+    	$consulta=$this->db->query("SELECT modificado FROM mensajes WHERE post = '{$this->idp}' AND usuario = '".$_SESSION['uid']."' ORDER BY creacion DESC LIMIT 1;");
     	while($filas=$consulta->fetch_assoc()){$this->fecha=$filas;}
     	return $this->fecha;
     }
@@ -66,6 +83,15 @@ class modelo_post{
     	else {return false;}
     }
     
+    public function editar_tema()
+    {
+    	$stmt = $this->db->prepare("UPDATE post SET titulo = ?, mensaje = ? WHERE id = '{$this->idp} AND creador = {$this->uid}' AND subtema = '{$this->id}';");
+    	$stmt -> bind_param('ss', $this->titulo, $this->mensaje);
+    	$stmt -> execute();
+    	$result = $stmt->get_result();
+    	if ($this->db->error){return "$sql<br>{$this->db->error}";}
+    	else {return false;}
+    }
     public function obtener_post()
     {
     	$consulta=$this->db->query("SELECT id FROM post WHERE creador = '{$this->uid}' ORDER BY creador DESC LIMIT 1;");
