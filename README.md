@@ -47,7 +47,7 @@ IMPLEMENTACIÓN EXTRA:
 
 :heavy_multiplication_x: Ajustes de la cuenta (Mensajes por post, orden, botones, etc...)
 
-:heavy_multiplication_x: Mensajes con estilos (Negrita, cursiva, tamaño, fuente, links, vídeos, imágenes, etc...)
+:heavy_check_mark: Mensajes con estilos (Negrita, cursiva, tamaño, fuente, links, vídeos, imágenes, etc...)
 
 :heavy_multiplication_x: Temas visuales
 
