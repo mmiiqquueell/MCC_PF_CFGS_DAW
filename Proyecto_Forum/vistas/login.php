@@ -35,9 +35,9 @@
             <h2 class="bg-warning-custom rounded">Inicio de sesión</h2>
             <form class="pb-5" action="index.php?controller=usuario&action=login" method="post">
                 <label>Usuario</label><br>
-                <input type="text" name="usuario" /><br><br>
+                <input type="text" name="usuario" required /><br><br>
                 <label>Contraseña</label><br>
-                <input type="password" name="password" /><br><br>
+                <input type="password" name="password" required /><br><br>
                 <input class="btn btn-primary text-white" type="submit" name="submit" value="iniciar sesión" />
             </form>
             

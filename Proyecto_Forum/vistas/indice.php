@@ -17,12 +17,8 @@
             }	
 
 
-            setTimeout(function(){alert("¡ATENCIÓN!: \n\nEsta página está en desarrollo por lo que es posible que tu cuenta de usuario y " +
-                "temas sea eliminada por posibles cambios en la base de datos, por favor, para evitar perder el tiempo no crees " +
-                "nuevo usuario o temas/respuestas hasta el día 8 de Junio donde el servidor dejara de ser modificado. Ten en cuenta " +
-                "que esto es un proyecto final de curso por lo que muchos apartados siguen sin funcionar. Afradeceria que no hicieras " +
-                "spam o colgaras enlaces no autorizados. Para los profesores si desean hacer pruebas pueden realizar las que quieran, tengan " +
-                "en cuenta el apartado de GIT para saber que funciona y no funciona");},1000);
+            setTimeout(function(){alert("¡ATENCIÓN!: \n\nEsta página está en desarrollo por lo que es posible que se pierdan todos los datos de vez en cuando." +
+        			"\n\n\n ACTUALIZADO: 27/05/2018\n\n v0.5.1.1:\n- Implementado WYSIWYG.\n\n\n");},1000);
 		}
 	</script>
     <body class="container p-0">

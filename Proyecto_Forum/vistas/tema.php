@@ -91,7 +91,7 @@
                     <!-- <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div> -->
                 </div>
                 <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
-                    <p class='col-12 mt-2 mb-2 p-3 mb-0 border rounded bg-white'>".nl2br($post['mensaje'])."</p>
+                    <div class='col-12 mt-2 mb-2 p-3 mb-0 border rounded bg-white'>".nl2br($post['mensaje'])."</div>
                     <!--p class='col-12 p-1 border my-auto rounded bg-white text-center'><img src='https://badges.steamprofile.com/profile/default/steam/76561197984336021.png' title='Firma de usuario' /></p-->
                 </div>
             </div>
@@ -145,7 +145,7 @@
 		                    <!-- <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div> -->
 		                </div>
 		                <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
-		                    <p class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".nl2br($mensajes[$m]['mensaje'])."</p>
+		                    <div class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".nl2br($mensajes[$m]['mensaje'])."</div>
 		                </div>
 		            </div>"; 
 	            }
