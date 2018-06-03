@@ -18,7 +18,17 @@
 
 
             setTimeout(function(){alert("¡ATENCIÓN!: \n\nEsta página está en desarrollo por lo que es posible que se pierdan todos los datos de vez en cuando." +
-        			"\n\n\n ACTUALIZADO: 27/05/2018\n\n v0.5.1.1:\n- Implementado WYSIWYG.\n\n\n");},1000);
+        			"\n\n\n ACTUALIZADO: 03/06/2018\n\n " +
+        			"v0.5.4.0: " +
+        			"\n- Ahora se muestra la información de mensajes en los subtemas por separado. " +
+        			"\n- Los usuarios pueden editar / eliminar sus mensajes (eliminar quedan permanente bloqueados y no se puede deshacer). " +
+        			"\n- Si se crea un tema es posible eliminarlo antes de que alguien responda. " +
+        			"\n- Los moderadores y administradores pueden editar y borrar todos los mensajes. " +
+        			"\n- Los administradores pueden cerrar y añadir pin a los temas. " +
+        			"\n\n\n"
+
+
+        			);},1000);
 		}
 	</script>
     <body class="container p-0">
@@ -51,12 +61,9 @@
 		            </div>";
 		            $a = $temas['nombre']; 
             	}
-		 
             	for ($i = 0; $i < count($subtemas); $i++){$fecha_post = "2000-01-01 00:00:00";
-			    	
 					if($temas['id'] == $subtemas[$i]['padre']){
 						for($p = 0; $p < count($contapost); $p++){
-							
 							if($subtemas[$i]['id'] == $contapost[$p]['subtema']){ 
 								if($contapost[$p]['ultima_fecha'] > $fecha_post){ 
 									$fecha_post = $contapost[$p]['ultima_fecha']; $nombre_post = $contapost[$p]['titulo'];
@@ -67,7 +74,6 @@
 									}
 								}
 								$post++;
-								
 								for($m = 0; $m < count($MSGT); $m++){
 									if($subtemas[$i]['id'] == $contapost[$p]['subtema'] && $contapost[$p]['id'] == $MSGT[$m]['post']){$totalmsg++;}
 									if($subtemas[$i]['id'] == $contapost[$p]['subtema'] && $contapost[$p]['id'] == $MSGT[$m]['post'] && $MSGT[$m]['creacion'] > $fecha_post){
@@ -79,10 +85,8 @@
 										}
 									}
 								}
-								
 							}
 						}
-						 
 		            echo "<div class='col-12 row b-transluced p-0 pl-lg-0 pb-1 mx-auto'>
 		            	<a href='index.php?controller=vistas&action=subindice&idst=".$subtemas[$i]['id']."&idt=".$temas['id']."' class='rounded-left col-6 border bg-white pb-2'>
 				            <span>".$subtemas[$i]['categoria']."</span><br>

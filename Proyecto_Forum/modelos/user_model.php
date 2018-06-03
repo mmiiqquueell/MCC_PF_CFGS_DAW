@@ -23,6 +23,8 @@ class modelo_usuario{
     public function setNivel($nivel) {$this -> nivel = $nivel;}
     public function getId() {return $this -> id;}
     public function setId($id) {$this -> id = $id;}
+    public function getPreferencias() {return $this -> preferencias;}
+    public function setPreferencias($preferencias) {$this -> preferencias = $preferencias;}
        
     
     /**
@@ -61,7 +63,7 @@ class modelo_usuario{
      */
     public function get_user()
     {
-    	$sql="SELECT nombre FROM usuarios WHERE nombre = '{$this->nombre}';";
+    	$sql="SELECT nombre FROM usuarios WHERE id = '{$this->id}';";
     	$result = $this->db->query($sql);
     	if ($result -> num_rows > 0) {return true;}
     	else {return false;}
@@ -135,5 +137,12 @@ class modelo_usuario{
     	$consulta=$this->db->query("SELECT validar FROM usuarios;");
     	while($filas=$consulta->fetch_assoc()){$this->id[]=$filas;}
     	return $this->id;
+    }
+    
+    public function get_preferencias()
+    {
+    	$consulta=$this->db->query("SELECT * FROM preferencias WHERE usuario = '{$this->id}';");
+    	while($filas=$consulta->fetch_assoc()){$this->preferencias=$filas;}
+    	return $this->preferencias;
     }
 }

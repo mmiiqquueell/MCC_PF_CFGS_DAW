@@ -36,6 +36,7 @@ class controlador_vistas {
     	$subtemas = $obtener_tema -> listar_subtemas();
     	$contapost = $obtener_tema -> contador_post();
     	$MSGT = $obtener_tema -> contador_mensajes_totales();
+    	$usuarios = $obtener_tema -> get_user();
     	if($tema && $temas && $subtemas && $contapost && $MSGT){require_once 'vistas/indica.php';}
     	else{header("Location: vistas/indica.php&error1");}
     }
@@ -112,6 +113,7 @@ class controlador_vistas {
     	$idt = $_GET['idt'];
     	$idst = $_GET['idst'];
     	$obtener_post = new modelo_vistas();
+    	$obtener_usuario = new modelo_usuario();
     	$obtener_post -> setIdp($idp);
     	$obtener_post -> setId($idt);
     	$obtener_post -> setIdst($idst);
@@ -123,6 +125,10 @@ class controlador_vistas {
     	$MSG = $obtener_post -> contador_mensajes_totales();
     	$usuarios = $obtener_post -> get_user();
     	$preferencias = $obtener_post -> mostrar_preferencias();
+    	if(isset($_SESSION['user'])){
+	    	$obtener_usuario -> setNombre($_SESSION['user']);
+	    	$nivel = $obtener_usuario -> verificar_nivel();
+    	} else {$nivel = array('nivel' => '0');}
     	if($post && $mensajes){require_once 'vistas/tema.php';}
     	else{header("Location: vistas/tema.php&error1");}
     }
@@ -151,7 +157,18 @@ class controlador_vistas {
     	require_once ("vistas/editarR.php");
     }
     
-    
+    public function mostrar_perfil()
+    {
+    	$obtener_temas = new modelo_vistas();
+    	$obtener_usuario = new modelo_usuario();
+    	$temas = $obtener_temas -> listar_temas();
+    	$obtener_usuario -> setId($_SESSION['uid']);
+    	$usuario = $obtener_temas -> get_user();
+    	$preferencias = $obtener_usuario -> get_preferencias();
+    	$MSG = $obtener_temas -> contador_mensajes_totales();
+    	if($temas && $preferencias && $MSG){require_once 'vistas/perfil.php';}
+    	else{header("Location: vistas/perfil.php&error1");}
+    }
     
     
     

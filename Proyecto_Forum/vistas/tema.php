@@ -26,17 +26,20 @@
          
          <?php 
          
-         $men = 0; $idst = $_GET['idst']; $total_men = 0; $cerrado = 0;
+         $men = 0; $idst = $_GET['idst']; $total_men = 0; $cerrado = 0; $del = 0;
          $_SESSION['idp'] = $_GET['idp']; $_SESSION['idt'] = $_GET['idt']; $_SESSION['idst'] = $_GET['idst'];
          
          for ($u = 0; $u < count($usuarios); $u++){
          	if($post['creador'] == $usuarios[$u]['id']) {$creador = $usuarios[$u]['nombre']; $registroC = $usuarios[$u]['registro']; $nivelC = $usuarios[$u]['nivel']; $cerrado = $post['cerrado'];
-         	for($i = 0; $i < count($preferencias); $i++){
-         		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
-         	}
-         	for($j = 0; $j < count($MSG); $j++){
-         		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
-         	}
+	         	for($i = 0; $i < count($preferencias); $i++){
+	         		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
+	         	}
+	         	for($j = 0; $j < count($MSG); $j++){
+	         		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
+	         	}
+	         	for($me = 0; $me < count($mensajes); $me++){
+	         		if($mensajes[$me]['post'] == $_GET['idp']){$del++;}
+	         	}
          	}
          	
          }
@@ -46,16 +49,15 @@
 		                <div class='rounded mb-2 col-12 bg-warning-custom'>
 		                    <h3 class='font-weight-bold'><a href='index.php?controller=vistas&action=indica&id=".$tema['id']."'>".$tema['nombre']."</a> > <a href='index.php?controller=vistas&action=subindice&idst=".$_GET['idst']."&idt=".$_GET['idt']."'>".$subtema['categoria']."</a></h3>
 		                </div>
-		                <div class='rounded col-12 "; if($cerrado == 1) {echo "bg-dark-custom text-white";} else {echo "bg-info-custom";} echo " text-light'>
-		                    <h4 class='font-weight-bold'>".$post['titulo']; if($cerrado == 1) {echo " > (TEMA CERRADO)";} echo "</h4>
-		                </div>
-		                
+		                <div class='rounded col-12 row m-0 w-100 "; if($cerrado == 1) {echo "bg-dark-custom text-white";} else {echo "bg-info-custom";} echo " text-light'>
+		                    <h4 class='col-11 font-weight-bold'>".$post['titulo']."</h4>"; 
+		                    if($cerrado == 1) {echo " > (TEMA CERRADO)";} 
+		                    if(intval($nivel['nivel']) >= 110 && intval($nivel['nivel']) < 200 && $post['pin'] == 0) {echo "<a href='index.php?controller=post&action=addpin&idp=".$_GET['idp']."&pin=1' class='col-1 border btn btn-info text-white my-auto'><span>ANCLAR</span></a>";} 
+		                    elseif(intval($nivel['nivel']) >= 110 && intval($nivel['nivel']) < 200 && $post['pin'] == 1) {echo "<a href='index.php?controller=post&action=addpin&idp=".$_GET['idp']."&pin=0' class='col-1 border btn btn-info text-white my-auto'><span>DESANCLAR</span></a>";} 
+		                echo "</div>
 		            </div>";	
             };
-            
-            
-            
-            
+                        
             echo "
 			<div class='col-12 row p-0 pb-2 b-transluced mx-auto'>
                 <div class='RLT col-2 pt-1 pb-2 bg-warning text-center'>
@@ -71,14 +73,19 @@
             		echo ">".$creador."</h5>
                 </div>
                 <div class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
-                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:i:s', strtotime($post['fecha_creacion']))."</span> 
-					<a class='col-1 btn btn-primary badge text-white'>CITAR</a>";
-            		if(isset($_SESSION['uid']) && $_SESSION['uid'] == $post['creador']){
-						echo "<a href='index.php?controller=vistas&action=editarTema&idp=".$_GET['idp']."&idt=".$_GET['idt']."&idst=".$_GET['idst']."' class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
-						<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>";}
-					else{
-						echo "<a class='col-1 btn btn-secondary badge text-dark'>EDITAR</a>
+                    <span class='table-secondary-custom rounded col-9'>Mensaje enviado el ".date('d/m/Y H:i:s', strtotime($post['fecha_creacion']))."</span>";
+            		if(isset($_SESSION['uid']) && $_SESSION['uid'] == $post['creador'] && $cerrado == 0 || intval($nivel['nivel']) >= 101 && intval($nivel['nivel']) < 200){
+						echo "<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
+							<a href='index.php?controller=vistas&action=editarTema&idp=".$_GET['idp']."&idt=".$_GET['idt']."&idst=".$_GET['idst']."' class='col-1 btn btn-warning badge text-dark'>EDITAR</a>";
+						if($del == 0){echo "<a href='index.php?controller=post&action=borrarPost&idp=".$_GET['idp']."' class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>";}
+						else{echo "<a class='col-1 btn btn-secondary badge text-dark'>ELIMINAR</a>";}
+					}
+					elseif($cerrado == 0){
+						echo "<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
+						<a class='col-1 btn btn-secondary badge text-dark'>EDITAR</a>
 						<a class='col-1 btn btn-secondary badge text-dark'>ELIMINAR</a>";}
+					elseif($cerrado == 1){
+						echo "<span class='col-3 btn table-dark badge text-warning'>Tema cerrado</span>";}
 					echo "
                 </div>
                 <div class='RLB col-2 pb-3 bg-warning text-center'>
@@ -126,14 +133,20 @@
 		            		echo ">".$usuarioR."</h5>
 		                </div>
 		                <div id=".$mensajes[$m]['id']." class='RRT col-10 row p-2 pb-2 bg-light mx-auto'>
-		                    <span class='table-secondary-custom rounded col-9'>Respondido el "; echo date('d/m/Y H:i:s', strtotime($mensajes[$m]['creacion'])); if(is_null($mensajes[$m]['modificado'])){} else{ echo " - Editado el ".date('d/m/Y H:i:s', strtotime($mensajes[$m]['modificado']));} echo "</span> 
-							<a class='col-1 btn btn-primary badge text-white'>CITAR</a>";
-							if(isset($_SESSION['uid']) && $_SESSION['uid'] == $mensajes[$m]['usuario']){
-								echo "<a href='index.php?controller=vistas&action=editar&idp=".$_GET['idp']."&mid=".$mensajes[$m]['id']."' class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
-								<a class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>";}
-							else{
-								echo "<a class='col-1 btn btn-secondary badge text-dark'>EDITAR</a>
+		                    <span class='table-secondary-custom rounded col-9'>Respondido el "; echo date('d/m/Y H:i:s', strtotime($mensajes[$m]['creacion'])); if(is_null($mensajes[$m]['modificado'])){} else{ echo " - Editado el ".date('d/m/Y H:i:s', strtotime($mensajes[$m]['modificado']));} echo "</span>";
+		            		if(isset($_SESSION['uid']) && $_SESSION['uid'] == $mensajes[$m]['usuario'] && $mensajes[$m]['borrado'] == 0 && $cerrado == 0 || intval($nivel['nivel']) >= 101 && intval($nivel['nivel']) < 200 && $mensajes[$m]['borrado'] == 0){
+								echo "<a class='col-1 btn btn-primary badge text-white'>CITAR</a><a href='index.php?controller=vistas&action=editar&idp=".$_GET['idp']."&mid=".$mensajes[$m]['id']."' class='col-1 btn btn-warning badge text-dark'>EDITAR</a>
+								<a href='index.php?controller=post&action=borrarMensaje&idp=".$_GET['idp']."&mid=".$mensajes[$m]['id']."' class='col-1 btn btn-danger badge text-white'>ELIMINAR</a>";}
+								elseif(isset($_SESSION['uid']) && $_SESSION['uid'] == $mensajes[$m]['usuario'] && $mensajes[$m]['borrado'] == 1  && $cerrado == 0 || intval($nivel['nivel']) >= 101 && intval($nivel['nivel']) < 200 && $mensajes[$m]['borrado'] == 1){
+								echo "<span class='col-3 btn table-dark badge text-warning'>Mensaje borrado</span>";}
+							elseif($mensajes[$m]['borrado'] == 1  && $cerrado == 0){
+								echo "<span class='col-3 btn btn-dark badge text-warning'>Mensaje borrado</span>";}
+							elseif($mensajes[$m]['borrado'] == 0  && $cerrado == 0){
+								echo "<a class='col-1 btn btn-primary badge text-white'>CITAR</a>
+								<a class='col-1 btn btn-secondary badge text-dark'>EDITAR</a>
 								<a class='col-1 btn btn-secondary badge text-dark'>ELIMINAR</a>";}
+							elseif($cerrado == 1){
+								echo "<span class='col-3 btn table-dark badge text-warning'>Tema cerrado</span>";}
 							echo "
 		                </div>
 		                <div class='RLB col-2 pb-3 bg-warning text-center'>
@@ -160,12 +173,13 @@
                 <a class='btn nounderline border bg-white' data-toggle='tooltip' title='Ir a la última página' href='#'>>>|</a> -->
             </div>
             <div class='col-6 p-0 b-transluced m-auto text-right'>
-                <a class="col-5 text-dark btn btn-warning">VOLVER AL INDICE</a>
+                <a href="index.php?controller=vistas&action=subindice&idt=<?php echo $_SESSION['idt']."&idst=".$_SESSION['idst']; ?>" class="col-3 text-dark btn btn-warning">VOLVER A INDICE</a>
                 <?php 
                 if($cerrado == '0'){
-                	if(isset($_SESSION['user'])){echo "<a href='index.php?controller=vistas&action=responder&idp=".$_GET['idp']."'class='col-5 text-white btn btn-primary'>RESPONDER</a>";} 
-                	else{echo "<a href='index.php?controller=vistas&action=pantalla_login' class='col-5 text-white btn btn-primary'>RESPONDER</a>";} 
-                } else {echo "<span class='col-5 text-white btn btn-dark'>CERRADO</span>";}
+                	if(isset($_SESSION['uid']) && intval($nivel['nivel']) >= 110 && intval($nivel['nivel']) < 200){echo "<a href='index.php?controller=post&action=cerrarTema&idp=".$_GET['idp']."'class='col-3 text-white btn btn-danger'>CERRAR</a>";} 
+                	if(isset($_SESSION['uid'])){echo " <a href='index.php?controller=vistas&action=responder&idp=".$_GET['idp']."'class='col-3 text-white btn btn-primary'>RESPONDER</a>";} 
+                	else{echo " <a href='index.php?controller=vistas&action=pantalla_login' class='col-3 text-white btn btn-primary'>RESPONDER</a>";} 
+                } else {echo "<span class='col-3 text-white btn btn-dark'>CERRADO</span>";}
                 ?>
             </div>
         </main>   

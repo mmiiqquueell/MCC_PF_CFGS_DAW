@@ -16,7 +16,9 @@ class modelo_post{
     public function getNombre() {return $this -> nombre;}
     public function setNombre($nombre) {$this -> nombre = $nombre;}    
     public function getId() {return $this -> id;}
-    public function setId($id) {$this -> id = $id;}
+    public function setId($id) {$this -> id = $id;}    
+    public function getPin() {return $this -> pin;}
+    public function setPin($pin) {$this -> pin = $pin;}
     public function getIdp() {return $this -> idp;}
     public function setIdp($idp) {$this -> idp = $idp;}
     public function getUid() {return $this -> uid;}
@@ -42,7 +44,7 @@ class modelo_post{
     
     public function editar_mensaje()
     {
-    	$stmt = $this->db->prepare("UPDATE mensajes SET mensaje = ? WHERE usuario = '{$this->uid}' AND post = '{$this->idp}' AND id = '{$this->id}';");
+    	$stmt = $this->db->prepare("UPDATE mensajes SET mensaje = ? WHERE post = '{$this->idp}' AND id = '{$this->id}';"); // usuario = '{$this->uid}'
     	$stmt -> bind_param('s', $this->mensaje);
     	$stmt -> execute();
     	$result = $stmt->get_result();
@@ -63,7 +65,6 @@ class modelo_post{
     	while($filas=$consulta->fetch_assoc()){$this->fecha=$filas;}
     	return $this->fecha;
     }
-    
     
     public function actualizar_fecha()
     {
@@ -106,5 +107,36 @@ class modelo_post{
     	return $this->id;
     }
     
+    public function delete_post()
+    {
+    	$sql = "DELETE FROM post WHERE id = '{$this->idp}';";
+    	$result = $this->db->query($sql);
+    	if ($result){return true;}
+    	else {return false;}
+    }
+    
+    public function delete_mensaje()
+    {
+    	$sql = "UPDATE mensajes SET mensaje = '{$this->mensaje}', borrado = 1 WHERE post = '{$this->idp}' AND id = '{$this->id}';"; //usuario = '{$this->uid}'
+    	$result = $this->db->query($sql);
+    	if (!$result){return true;}
+    	else {return false;}
+    }
+    
+    public function tema_cerrado()
+    {
+    	$sql = "UPDATE post SET cerrado = 1 WHERE id = '{$this->idp}';";
+    	$result = $this->db->query($sql);
+    	if ($result){return true;}
+    	else {return false;}
+    }
+    
+    public function tema_pin()
+    {
+    	$sql = "UPDATE post SET pin = '{$this->pin}' WHERE id = '{$this->idp}';";
+    	$result = $this->db->query($sql);
+    	if (!$result){return true;}
+    	else {return false;}
+    }
 }
     

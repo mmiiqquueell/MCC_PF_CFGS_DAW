@@ -51,9 +51,14 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     	$controller = new controlador_post();
     	
     	if($_GET['action'] == "crear_post"){$controller -> crear_post();}
-    	if($_GET['action'] == "editar_post"){$controller -> editar_post();}
+    	elseif($_GET['action'] == "editar_post"){$controller -> editar_post();}
     	elseif($_GET['action'] == "comentar"){$controller -> comentar();}
     	elseif($_GET['action'] == "editarComentario"){$controller -> editarMensaje();}
+    	elseif($_GET['action'] == "borrarPost"){$controller -> borrar_post();}
+    	elseif($_GET['action'] == "borrarMensaje"){$controller -> borrar_mensaje();}
+    	elseif($_GET['action'] == "cerrarTema"){$controller -> cerrar_tema();}
+    	elseif($_GET['action'] == "addpin"){$controller -> add_del_pin();}
+    	
     	
     }
 } 

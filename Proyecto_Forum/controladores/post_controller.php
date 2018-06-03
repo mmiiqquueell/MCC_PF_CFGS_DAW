@@ -25,7 +25,7 @@ class controlador_post
 		$responder_post -> setFecha($fechas['creacion']);
 		$actualizado = $responder_post->actualizar_fecha();
 		if(!$contestar){header("Location: index.php?controller=vistas&action=tema&idp=".$_SESSION['idp']."&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."#".$identificador['id']."");}
-		else{echo "Se ha producido un error al añadir el comentario, por favor intentelo más tarde";}
+		else{echo "Se ha producido un error al añadir el comentario, por favor, intentelo más tarde.";}
 	}
 	
 	public function editarMensaje()
@@ -40,9 +40,8 @@ class controlador_post
 		$editar_mensaje-> setId($mid);
 		$editar_mensaje-> setMensaje($mensaje);
 		$modificado = $editar_mensaje -> editar_mensaje();
-		$identificador = $editar_mensaje-> obtener_mensaje();
-		if(!$modificado){header("Location: index.php?controller=vistas&action=tema&idp=".$_SESSION['idp']."&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."#".$identificador['id']."");}
-		else{echo "Se ha producido un error al editar el comentario, por favor intentelo más tarde";}
+		if(!$modificado){header("Location: index.php?controller=vistas&action=tema&idp=".$_SESSION['idp']."&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."#".$mid."");}
+		else{echo "Se ha producido un error al editar el comentario, por favor, intentelo más tarde.";}
 	}
 	
 	public function crear_post()
@@ -60,7 +59,7 @@ class controlador_post
 		$creado = $crear_post -> crear_tema();
 		$idp = $crear_post -> obtener_post();
 		if(!$creado){header("Location: index.php?controller=vistas&action=tema&idp=".$idp['id']."&idt=".$idt."&idst=".$idst."");}
-		else{echo "Se ha producido un error al crear el tema, por favor intentelo más tarde";}
+		else{echo "Se ha producido un error al crear el tema, por favor, intentelo más tarde.";}
 	}
 	
 	public function editar_post()
@@ -80,9 +79,57 @@ class controlador_post
 		$modificado = $editar_post-> editar_tema();
 		
 		if(!$modificado){header("Location: index.php?controller=vistas&action=tema&idp=".$idp."&idt=".$idt."&idst=".$idst."");}
-		else{echo "Se ha producido un error al editar el tema, por favor intentelo más tarde";}
+		else{echo "Se ha producido un error al editar el tema, por favor, intentelo más tarde.";}
 	}
 	
+	public function borrar_post()
+	{
+		$idp = $_GET['idp'];
+		$borrar_post = new modelo_post();
+		$borrar_post -> setIdp($idp);
+		$error = $borrar_post -> delete_post();
+		if($error){header("Location: index.php?controller=vistas&action=subindice&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."");}
+		else {echo "Se ha producido un error al intentar borrar el tema, por favor, intentelo más tarde.";}
+	}
+	
+	
+	public function borrar_mensaje()
+	{
+		$uid = $_SESSION['uid'];
+		$post = $_GET['idp'];
+		$mid = $_GET['mid'];
+		$mensaje = "El usuario ha eliminado el mensaje.";
+		$editar_mensaje = new modelo_post();
+		$editar_mensaje-> setUid($uid);
+		$editar_mensaje-> setIdp($post);
+		$editar_mensaje-> setId($mid);
+		$editar_mensaje-> setMensaje($mensaje);
+		$modificado = $editar_mensaje -> delete_mensaje();
+		if(!$modificado){header("Location: index.php?controller=vistas&action=tema&idp=".$_SESSION['idp']."&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."#".$mid."");}
+		else{echo "Se ha producido un error al editar el comentario, por favor, intentelo más tarde.";}
+	}
+	
+	public function cerrar_tema()
+	{
+		$idp = $_GET['idp'];
+		$cerrar_tema = new modelo_post();
+		$cerrar_tema -> setIdp($idp);
+		$cerrado = $cerrar_tema -> tema_cerrado();
+		if($cerrado){header("Location: index.php?controller=vistas&action=tema&idp=".$_SESSION['idp']."&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."");}
+		else {echo "Se ha producido un error al intentar borrar el tema, por favor, intentelo más tarde.";}
+	}
+	
+	public function add_del_pin()
+	{
+		$idp = $_GET['idp'];
+		$pin = $_GET['pin'];
+		$add_pin = new modelo_post();
+		$add_pin -> setIdp($idp);
+		$add_pin -> setPin($pin);
+		$anclado = $add_pin -> tema_pin();
+		if(!$anclado){header("Location: index.php?controller=vistas&action=tema&idp=".$_SESSION['idp']."&idt=".$_SESSION['idt']."&idst=".$_SESSION['idst']."");}
+		else{echo "Se ha producido un error al editar el comentario, por favor, intentelo más tarde.";}
+	}
 }
 
 ?>

@@ -140,5 +140,4 @@ class modelo_vistas{
     	while($filas=$consulta->fetch_assoc()){$this->preferencias[]=$filas;}
     	return $this->preferencias;
     }
-    
 }
