@@ -25,7 +25,36 @@ class modelo_usuario{
     public function setId($id) {$this -> id = $id;}
     public function getPreferencias() {return $this -> preferencias;}
     public function setPreferencias($preferencias) {$this -> preferencias = $preferencias;}
-       
+    public function getFirma() {return $this -> firma;}
+    public function setFirma($firma) {$this -> firma = $firma;}
+    public function getTema() {return $this -> tema;}
+    public function setTema($tema) {$this -> tema = $tema;}
+    public function getSexo() {return $this -> sexo;}
+    public function setSexo($sexo) {$this -> sexo = $sexo;}
+    public function getBiografia() {return $this -> biografia;}
+    public function setBiografia($biografia) {$this -> biografia = $biografia;}
+    public function getSteam() {return $this -> steam;}
+    public function setSteam($steam) {$this -> steam = $steam;}
+    public function getPlaystation() {return $this -> playstation;}
+    public function setPlaystation($playstation) {$this -> playstation = $playstation;}
+    public function getXboxlive() {return $this -> xboxlive;}
+    public function setXboxlive($xboxlive) {$this -> xboxlive = $xboxlive;}
+    public function getNintendo() {return $this -> nintendo;}
+    public function setNintendo($nintendo) {$this -> nintendo = $nintendo;}
+    public function getEdad() {return $this->edad;}
+    public function setEdad($edad) {$this -> edad = $edad;}
+    public function getMensajes() {return $this -> mensajes;}
+    public function setMensajes($mensajes) {$this -> mensajes = $mensajes;}
+    public function getEstilofecha() {return $this -> estilofecha;}
+    public function setEstilofecha($estilofecha) {$this -> estilofecha = $estilofecha;}
+    public function getZonahoraria() {return $this -> zonahoraria;}
+    public function setZonahoraria($zonahoraria) {$this -> zonahoraria = $zonahoraria;}
+    public function getPaginaweb() {return $this -> paginaweb;}
+    public function setPaginaweb($paginaweb) {$this -> paginaweb = $paginaweb;}
+    public function getOrdenmensajes() {return $this -> ordenmensajes;}
+    public function setOrdenmensajes($ordenmensajes) {$this -> ordenmensajes = $ordenmensajes;}
+    
+    
     
     /**
      * Inserta un nuevo usuario a la base de datos.
@@ -144,5 +173,15 @@ class modelo_usuario{
     	$consulta=$this->db->query("SELECT * FROM preferencias WHERE usuario = '{$this->id}';");
     	while($filas=$consulta->fetch_assoc()){$this->preferencias=$filas;}
     	return $this->preferencias;
+    }
+    
+    public function actualizar_preferencias()
+    {
+    	$stmt = $this->db->prepare("UPDATE preferencias SET avatar = '".$_SESSION['user'].".jpg', firma = ?, tema = ?, sexo = ?, biografia = ?, steam = ?, playstation = ?, xboxlive = ?, nintendo = ?, edad = ?, mensajes = ?, estilofecha = ?, zonahoraria = ?, paginaweb = ?, ordenmensajes = ? WHERE usuario = '".$_SESSION['uid']."' ;");
+    	$stmt -> bind_param('ssssssssssssss', $this->firma, $this->tema, $this->sexo, $this->biografia, $this->steam, $this->playstation, $this->xboxlive, $this->nintendo, $this->edad, $this->mensajes, $this->estilofecha, $this->zonahoraria, $this->paginaweb, $this->ordenmensajes);
+    	$stmt -> execute();
+    	$result = $stmt->get_result();
+    	if ($this->db->error){return "$sql<br>{$this->db->error}";}
+    	else {return false;}
     }
 }

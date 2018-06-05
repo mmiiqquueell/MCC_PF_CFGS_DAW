@@ -32,7 +32,7 @@
          for ($u = 0; $u < count($usuarios); $u++){
          	if($post['creador'] == $usuarios[$u]['id']) {$creador = $usuarios[$u]['nombre']; $registroC = $usuarios[$u]['registro']; $nivelC = $usuarios[$u]['nivel']; $cerrado = $post['cerrado'];
 	         	for($i = 0; $i < count($preferencias); $i++){
-	         		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
+	         		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar']; $firmaC = $preferencias[$i]['firma'];}
 	         	}
 	         	for($j = 0; $j < count($MSG); $j++){
 	         		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
@@ -50,8 +50,8 @@
 		                    <h3 class='font-weight-bold'><a href='index.php?controller=vistas&action=indica&id=".$tema['id']."'>".$tema['nombre']."</a> > <a href='index.php?controller=vistas&action=subindice&idst=".$_GET['idst']."&idt=".$_GET['idt']."'>".$subtema['categoria']."</a></h3>
 		                </div>
 		                <div class='rounded col-12 row m-0 w-100 "; if($cerrado == 1) {echo "bg-dark-custom text-white";} else {echo "bg-info-custom";} echo " text-light'>
-		                    <h4 class='col-11 font-weight-bold'>".$post['titulo']."</h4>"; 
-		                    if($cerrado == 1) {echo " > (TEMA CERRADO)";} 
+		                    <h4 class='col-11 font-weight-bold'>".$post['titulo']; 
+            				if($cerrado == 1) {echo " > (TEMA CERRADO) </h4>";} elseif($cerrado == 0) {echo "</h4>";}
 		                    if(intval($nivel['nivel']) >= 110 && intval($nivel['nivel']) < 200 && $post['pin'] == 0) {echo "<a href='index.php?controller=post&action=addpin&idp=".$_GET['idp']."&pin=1' class='col-1 border btn btn-info text-white my-auto'><span>ANCLAR</span></a>";} 
 		                    elseif(intval($nivel['nivel']) >= 110 && intval($nivel['nivel']) < 200 && $post['pin'] == 1) {echo "<a href='index.php?controller=post&action=addpin&idp=".$_GET['idp']."&pin=0' class='col-1 border btn btn-info text-white my-auto'><span>DESANCLAR</span></a>";} 
 		                echo "</div>
@@ -98,18 +98,16 @@
                     <!-- <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div> -->
                 </div>
                 <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
-                    <div class='col-12 mt-2 mb-2 p-3 mb-0 border rounded bg-white'>".nl2br($post['mensaje'])."</div>
-                    <!--p class='col-12 p-1 border my-auto rounded bg-white text-center'><img src='https://badges.steamprofile.com/profile/default/steam/76561197984336021.png' title='Firma de usuario' /></p-->
-                </div>
-            </div>
-			";
+                    <div class='col-12 mt-2 mb-2 p-3 mb-0 border rounded bg-white'>".nl2br($post['mensaje'])."</div>";
+                    if(!empty($firmaC)){ echo"<p class='col-12 p-1 border my-auto rounded bg-white text-center'>".$firmaC."</p>";} 
+                    echo "</div></div>";
             
             for($m = 0; $m < count($mensajes); $m++){$total_men = 0;
 	            if($_GET['idp'] == $mensajes[$m]['post']){
 	            	for ($u = 0; $u < count($usuarios); $u++){
 	            		if($mensajes[$m]['usuario'] == $usuarios[$u]['id']) {$usuarioR = $usuarios[$u]['nombre']; $registroR = $usuarios[$u]['registro']; $nivelR = $usuarios[$u]['nivel'];
 			            	for($i = 0; $i < count($preferencias); $i++){
-			            		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar'];}
+			            		if($preferencias[$i]['usuario'] == $usuarios[$u]['id']) {$avatar = $preferencias[$i]['avatar']; $firma = $preferencias[$i]['firma'];}
 			            	}
 			            	for($j = 0; $j < count($MSG); $j++){
 			            		if($MSG[$j]['usuario'] == $usuarios[$u]['id']){$total_men++;}
@@ -158,9 +156,9 @@
 		                    <!-- <div class='d-inline-block m-auto mb-2 text-center mensajeprivado'><a href='#'>MP</a></div> -->
 		                </div>
 		                <div class='RRB col-10 row p-2 pb-3 bg-light mx-auto'>
-		                    <div class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".nl2br($mensajes[$m]['mensaje'])."</div>
-		                </div>
-		            </div>"; 
+		                    <div class='col-12 mt-2 p-3 mb-0 border rounded bg-white'>".nl2br($mensajes[$m]['mensaje'])."</div>";
+		                if(!empty($firma)){ echo"<p class='col-12 p-1 border my-auto rounded bg-white text-center'>".$firma."</p>";} 
+                    echo "</div></div>";
 	            }
             }
          ?>

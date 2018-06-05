@@ -19,12 +19,10 @@
 
             setTimeout(function(){alert("¡ATENCIÓN!: \n\nEsta página está en desarrollo por lo que es posible que se pierdan todos los datos de vez en cuando." +
         			"\n\n\n ACTUALIZADO: 03/06/2018\n\n " +
-        			"v0.5.4.0: " +
-        			"\n- Ahora se muestra la información de mensajes en los subtemas por separado. " +
-        			"\n- Los usuarios pueden editar / eliminar sus mensajes (eliminar quedan permanente bloqueados y no se puede deshacer). " +
-        			"\n- Si se crea un tema es posible eliminarlo antes de que alguien responda. " +
-        			"\n- Los moderadores y administradores pueden editar y borrar todos los mensajes. " +
-        			"\n- Los administradores pueden cerrar y añadir pin a los temas. " +
+        			"v0.6.0.4: " +
+        			"\n- Añadido perfil de usuario (solo visible para cada usuario el suyo propio). " +
+        			"\n- Puedes editar el perfil en todos los aspectos salvo cambiar contraseña o establecer formato de fecha aunque solo funciona la firma y avatar realmente. " +
+        			"\n- Puedes subir un avatar en JPG unicamente sin limitadores aunque el servidor si que tiene un limitador por defecto. " +
         			"\n\n\n"
 
 

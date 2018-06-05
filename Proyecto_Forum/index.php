@@ -27,8 +27,6 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         elseif($_GET['action'] == "master") {$controller -> mostrar_master();} // Mostrar pantalla de administración
         elseif($_GET['action'] == "activado") {$controller -> mostrar_activado();} // Mostrar pantalla de activación de cuenta
         elseif($_GET['action'] == "reenviar") {$controller -> mostrar_reactivado();} // Mostrar pantalla para reenviar email de activación de cuenta
-        
-        
     } 
             
     /* CONTROLADOR DE USUARIO */
@@ -36,12 +34,12 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     	
     	$controller = new controlador_usuario();
        
-       if($_GET['action'] == "crear"){$controller -> crear();}
-       elseif($_GET['action'] == "login"){$controller -> login();}
-       elseif($_GET['action'] == "activar") {$controller -> activar_cuenta();}
-       elseif($_GET['action'] == "resendmail") {$controller -> reenviar_mail();}
-       elseif($_GET['action'] == "salir") {$controller -> cerrar();} 
-    
+       if($_GET['action'] == "crear"){$controller -> crear();} // Crear nuevo usuario
+       elseif($_GET['action'] == "login"){$controller -> login();} // Login de usuario
+       elseif($_GET['action'] == "activar") {$controller -> activar_cuenta();} // Activar cuenta de usuario
+       elseif($_GET['action'] == "resendmail") {$controller -> reenviar_mail();} // Reenviar email de activación
+       elseif($_GET['action'] == "salir") {$controller -> cerrar();}  // Cerrar sesión de usuario
+       elseif($_GET['action'] == "guardarConfig"){$controller -> guardar_config();} // Guardar configuración de usuario
     }
     
     
@@ -50,16 +48,14 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     	
     	$controller = new controlador_post();
     	
-    	if($_GET['action'] == "crear_post"){$controller -> crear_post();}
-    	elseif($_GET['action'] == "editar_post"){$controller -> editar_post();}
-    	elseif($_GET['action'] == "comentar"){$controller -> comentar();}
-    	elseif($_GET['action'] == "editarComentario"){$controller -> editarMensaje();}
-    	elseif($_GET['action'] == "borrarPost"){$controller -> borrar_post();}
-    	elseif($_GET['action'] == "borrarMensaje"){$controller -> borrar_mensaje();}
-    	elseif($_GET['action'] == "cerrarTema"){$controller -> cerrar_tema();}
-    	elseif($_GET['action'] == "addpin"){$controller -> add_del_pin();}
-    	
-    	
+    	if($_GET['action'] == "crear_post"){$controller -> crear_post();} // Crea nuevo tema
+    	elseif($_GET['action'] == "editar_post"){$controller -> editar_post();} // Editar tema
+    	elseif($_GET['action'] == "comentar"){$controller -> comentar();} // Añadir comentario
+    	elseif($_GET['action'] == "editarComentario"){$controller -> editarMensaje();} // Editar comentario
+    	elseif($_GET['action'] == "borrarPost"){$controller -> borrar_post();} // Borrar tema
+    	elseif($_GET['action'] == "borrarMensaje"){$controller -> borrar_mensaje();} // Borrar mensaje
+    	elseif($_GET['action'] == "cerrarTema"){$controller -> cerrar_tema();} // Cerrar tema
+    	elseif($_GET['action'] == "addpin"){$controller -> add_del_pin();} // Añadir chincheta o pin
     }
 } 
 

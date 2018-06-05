@@ -47,7 +47,10 @@ body {
 	background-color: #FFC107 !important; transition-duration: 2s;
 }
 .bg-warning-hover:hover {
-	background-color: #ffff6a!important; transition-duration: 0.2s;
+	background-color: #ffff6a !important; transition-duration: 0.2s;
+}
+.bg-dark-custom-2 {
+    background: #000 !important;
 }
 
 

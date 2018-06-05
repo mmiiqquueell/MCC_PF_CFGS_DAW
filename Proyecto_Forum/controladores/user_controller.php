@@ -146,5 +146,43 @@ class controlador_usuario
 		}
 	}
 	
+	public function guardar_config()
+	{
+		$obtener_temas = new modelo_vistas();
+		$obtener_usuario = new modelo_usuario();
+		$temas = $obtener_temas -> listar_temas();
+		$obtener_usuario -> setId($_SESSION['uid']);
+		$usuario = $obtener_temas -> get_user();
+		$preferencias = $obtener_usuario -> get_preferencias();
+		
+		
+		if($_FILES['IMG1']['size'] == 0){}
+		else{
+			$info = pathinfo($_FILES['IMG1']['name']);
+			$ext = $info['extension'];
+			$newname = $_SESSION['user'].'.'.$ext;
+			$target = 'images/avatares/'.$newname;
+			move_uploaded_file($_FILES['IMG1']['tmp_name'], $target);
+		};		
+		if($_POST['firma'] != $preferencias['firma']){$obtener_usuario -> setFirma($_POST['firma']);} else{$obtener_usuario -> setFirma($preferencias['firma']);};
+		if($_POST['bio'] != $preferencias['biografia']){$obtener_usuario -> setBiografia($_POST['bio']);} else{$obtener_usuario -> setBiografia($preferencias['biografia']);};
+		if($_POST['edad'] != $preferencias['edad']){$obtener_usuario -> setEdad($_POST['edad']);} else{$obtener_usuario -> setEdad($preferencias['edad']);};
+		if($_POST['sexo'] != $preferencias['sexo']){$obtener_usuario -> setSexo($_POST['sexo']);} else{$obtener_usuario -> setSexo($preferencias['sexo']);};
+		if($_POST['web'] != $preferencias['paginaweb']){$obtener_usuario -> setPaginaweb($_POST['web']);} else{$obtener_usuario -> setPaginaweb($preferencias['paginaweb']);};
+		if($_POST['nintendo'] != $preferencias['nintendo']){$obtener_usuario -> setNintendo($_POST['nintendo']);} else{$obtener_usuario -> setNintendo($preferencias['nintendo']);};
+		if($_POST['sony'] != $preferencias['playstation']){$obtener_usuario -> setPlaystation($_POST['sony']);} else{$obtener_usuario -> setPlaystation($preferencias['playstation']);};
+		if($_POST['steam'] != $preferencias['steam']){$obtener_usuario -> setSteam($_POST['steam']);} else{$obtener_usuario -> setSteam($preferencias['steam']);};
+		if($_POST['xlive'] != $preferencias['xboxlive']){$obtener_usuario -> setXboxlive($_POST['xlive']);} else{$obtener_usuario -> setXboxlive($preferencias['xboxlive']);};
+		//if($_POST['oldPW'] == ''){};
+		//if($_POST['newPW'] == ''){};
+		if($_POST['tema'] != $preferencias['tema']){$obtener_usuario -> setTema($_POST['tema']);} else{$obtener_usuario -> setTema($preferencias['tema']);};
+		if($_POST['fecha'] != $preferencias['estilofecha']){$obtener_usuario -> setEstilofecha($_POST['fecha']);} else{$obtener_usuario -> setEstilofecha($preferencias['estilofecha']);};
+		if($_POST['horario'] != $preferencias['zonahoraria']){$obtener_usuario -> setZonahoraria($_POST['horario']);} else{$obtener_usuario -> setZonahoraria($preferencias['zonahoraria']);};
+		if($_POST['cantidad'] != $preferencias['mensajes']){$obtener_usuario -> setMensajes($_POST['cantidad']);} else{$obtener_usuario -> setMensajes($preferencias['mensajes']);};
+		if($_POST['ordenar'] != $preferencias['ordenmensajes']){$obtener_usuario -> setOrdenmensajes($_POST['ordenar']);} else{$obtener_usuario -> setOrdenmensajes($preferencias['ordenmensajes']);};
+		$error = $obtener_usuario -> actualizar_preferencias();
+		if($temas && $preferencias && !$error){header("Location: index.php?controller=vistas&action=perfil");}
+		else{header("Location: vistas/perfil.php&error1");}	
+	}
 	
 }
