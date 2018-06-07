@@ -25,10 +25,11 @@
          
          
          <?php 
-         
+         // Casi no recuerdo que hacia cada parte...
          $men = 0; $idst = $_GET['idst']; $total_men = 0; $cerrado = 0; $del = 0;
          $_SESSION['idp'] = $_GET['idp']; $_SESSION['idt'] = $_GET['idt']; $_SESSION['idst'] = $_GET['idst'];
          
+         // Obtiene los valores del creador del post y los almacena en diferentes variables
          for ($u = 0; $u < count($usuarios); $u++){
          	if($post['creador'] == $usuarios[$u]['id']) {$creador = $usuarios[$u]['nombre']; $registroC = $usuarios[$u]['registro']; $nivelC = $usuarios[$u]['nivel']; $cerrado = $post['cerrado'];
 	         	for($i = 0; $i < count($preferencias); $i++){
@@ -43,7 +44,7 @@
          	}
          	
          }
-         foreach ($tema as $tema){
+         foreach ($tema as $tema){ // Obtiene información del subtema así como los permisos segun si es administrador o usuario normal para añadir anclaje al post.
             	echo "
 					<div class='col-12 row p-0 pb-2 b-transluced pl-lg-0 mx-auto'>
 		                <div class='rounded mb-2 col-12 bg-warning-custom'>
@@ -57,7 +58,7 @@
 		                echo "</div>
 		            </div>";	
             };
-                        
+            // Muestra el rago del creador del post así como título, mensaje, fecha, firma (si tiene), avatar, editar, eliminar post (si se puede).
             echo "
 			<div class='col-12 row p-0 pb-2 b-transluced mx-auto'>
                 <div class='RLT col-2 pt-1 pb-2 bg-warning text-center'>
@@ -102,6 +103,7 @@
                     if(!empty($firmaC)){ echo"<p class='col-12 p-1 border my-auto rounded bg-white text-center'>".$firmaC."</p>";} 
                     echo "</div></div>";
             
+                    // Se repite el proceso de antes pero esta vez para cada usuario que ha respondido al post.
             for($m = 0; $m < count($mensajes); $m++){$total_men = 0;
 	            if($_GET['idp'] == $mensajes[$m]['post']){
 	            	for ($u = 0; $u < count($usuarios); $u++){
@@ -162,7 +164,8 @@
 	            }
             }
          ?>
-            <div class='col-6 p-0 b-transluced m-auto text-left'>
+         
+            <div class='col-6 p-0 b-transluced m-auto text-left'><?php // Páginación desactivada ya que no está programada. ?>
                 <!-- <a class='btn nounderline border bg-white' data-toggle='tooltip' title='Ir a la primera página' href='#'>|<<</a>
                 <a class='btn nounderline border bg-white' data-toggle='tooltip' title='Ir a la página anterior' href='#'><</a>
                 <span class='btn nounderline border bg-primary text-white' data-toggle='tooltip' title='Página actual' >1</span>

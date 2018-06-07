@@ -31,7 +31,10 @@ class modelo_post{
     public function setFecha($fecha){$this -> fecha = $fecha;}
     
     
-    
+    /**
+     * Inserta un mensaje nuevo
+     * @return boolean
+     */
     public function responder_mensaje()
     {
     	$stmt = $this->db->prepare("INSERT INTO mensajes (usuario, mensaje, post, modificado) VALUES ('{$this->uid}',?,'{$this->idp}', NULL);");
@@ -42,6 +45,10 @@ class modelo_post{
     	else {return false;}
     }
     
+    /**
+     * Edita un mensaje existente
+     * @return boolean
+     */
     public function editar_mensaje()
     {
     	$stmt = $this->db->prepare("UPDATE mensajes SET mensaje = ? WHERE post = '{$this->idp}' AND id = '{$this->id}';"); // usuario = '{$this->uid}'
@@ -52,6 +59,10 @@ class modelo_post{
     	else {return false;}
     }
     
+    /**
+     * Obtiene la fecha de un mensaje
+     * @return date
+     */
     public function obtener_fecha_mensaje()
     {
     	$consulta=$this->db->query("SELECT creacion FROM mensajes WHERE post = '{$this->idp}' AND usuario = '".$_SESSION['uid']."' ORDER BY creacion DESC LIMIT 1;");
@@ -59,6 +70,10 @@ class modelo_post{
     	return $this->fecha;
     }
     
+    /**
+     * Obtiene la fecha del mensaje editado
+     * @return date
+     */
     public function obtener_fecha_editar_mensaje()
     {
     	$consulta=$this->db->query("SELECT modificado FROM mensajes WHERE post = '{$this->idp}' AND usuario = '".$_SESSION['uid']."' ORDER BY creacion DESC LIMIT 1;");
@@ -66,6 +81,10 @@ class modelo_post{
     	return $this->fecha;
     }
     
+    /**
+     * Actualiza la fecha de modificación
+     * @return boolean
+     */
     public function actualizar_fecha()
     {
     	$sql = "UPDATE post SET ultima_fecha = '{$this->fecha}' WHERE id = '{$this->idp}';";
@@ -74,6 +93,10 @@ class modelo_post{
     	else {return false;}
     }
     
+    /**
+     * Crea un nuevo post
+     * @return boolean
+     */
     public function crear_tema()
     {
     	$stmt = $this->db->prepare("INSERT INTO post (subtema, titulo, mensaje, creador) VALUES ('{$this->idp}',?,?,'{$this->uid}');");
@@ -84,6 +107,10 @@ class modelo_post{
     	else {return false;}
     }
     
+    /**
+     * Edita un post
+     * @return boolean
+     */
     public function editar_tema()
     {
     	$stmt = $this->db->prepare("UPDATE post SET titulo = ?, mensaje = ? WHERE id = '{$this->idp} AND creador = {$this->uid}' AND subtema = '{$this->id}';");
@@ -93,6 +120,11 @@ class modelo_post{
     	if ($this->db->error){return "$sql<br>{$this->db->error}";}
     	else {return false;}
     }
+    
+    /**
+     * Devuelve el valor del ID de un post
+     * @return integer
+     */
     public function obtener_post()
     {
     	$consulta=$this->db->query("SELECT id FROM post WHERE creador = '{$this->uid}' ORDER BY creador DESC LIMIT 1;");
@@ -100,6 +132,10 @@ class modelo_post{
     	return $this->id;
     }
     
+    /**
+     * Devuelve el valor del ID de un mensaje
+     * @return integer
+     */
     public function obtener_mensaje()
     {
     	$consulta=$this->db->query("SELECT id FROM mensajes WHERE usuario = '{$this->uid}' ORDER BY usuario DESC LIMIT 1;");
@@ -107,6 +143,10 @@ class modelo_post{
     	return $this->id;
     }
     
+    /**
+     * Elimina un post si se permite
+     * @return boolean
+     */
     public function delete_post()
     {
     	$sql = "DELETE FROM post WHERE id = '{$this->idp}';";
@@ -115,6 +155,10 @@ class modelo_post{
     	else {return false;}
     }
     
+    /**
+     * Actualiza un mensaje indicando que se ha eliminado
+     * @return boolean
+     */
     public function delete_mensaje()
     {
     	$sql = "UPDATE mensajes SET mensaje = '{$this->mensaje}', borrado = 1 WHERE post = '{$this->idp}' AND id = '{$this->id}';"; //usuario = '{$this->uid}'
@@ -123,6 +167,10 @@ class modelo_post{
     	else {return false;}
     }
     
+    /**
+     * Actualiza un post para indicar que está cerrado
+     * @return boolean
+     */
     public function tema_cerrado()
     {
     	$sql = "UPDATE post SET cerrado = 1 WHERE id = '{$this->idp}';";
@@ -131,6 +179,11 @@ class modelo_post{
     	else {return false;}
     }
     
+    
+    /**
+     * Indica si un post ha sido anclado
+     * @return boolean
+     */
     public function tema_pin()
     {
     	$sql = "UPDATE post SET pin = '{$this->pin}' WHERE id = '{$this->idp}';";

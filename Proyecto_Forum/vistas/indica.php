@@ -23,7 +23,7 @@
         <div id="filtro" class="filtro"></div>
         <main class="mt-3 col-12 b-transluced text-dark p-0 text-left">
             <div class='col-12 row p-0 pb-3 b-transluced text-center mx-auto'>
-                <div class='rounded-left col-7 border bg-white pb-1'>
+                <div class='rounded-left col-6 border bg-white pb-1'>
                     <span>SECCIONES</span>
                 </div>
                 <div class='col-1 border bg-white'>
@@ -32,7 +32,7 @@
                 <div class='col-1 border bg-white'>
                     <span>MSG</span>
                 </div>
-                <div class='rounded-right col-3 border bg-white'>
+                <div class='rounded-right col-4 border bg-white'>
                     <span>ÚLTIMO MENSAJE</span>
                 </div>
             </div>

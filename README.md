@@ -39,17 +39,17 @@ IMPLEMENTACIÓN EXTRA:
 
 :heavy_check_mark: Validación de email
 
-:heavy_multiplication_x: Mostrar estadísticas de usuario
+:heavy_check_mark: Mostrar información de usuario → Solo visible para uno mismo.
 
-:heavy_multiplication_x: Poner / mostrar avatar y firma
+:heavy_check_mark: Poner / mostrar avatar y firma
 
 :heavy_multiplication_x: Mensajería privada
 
-:heavy_multiplication_x: Ajustes de la cuenta (Mensajes por post, orden, botones, etc...)
+:heavy_check_mark: Ajustes de la cuenta (Mensajes por post, orden, botones, etc...) → Implementado pero no funciona.
 
 :heavy_check_mark: Mensajes con estilos (Negrita, cursiva, tamaño, fuente, links, vídeos, imágenes, etc...)
 
-:heavy_multiplication_x: Temas visuales
+:heavy_check_mark: Temas visuales → Implementado pero no funciona.
 
 :heavy_multiplication_x: Colecciones (Muestra tu colección de consolas/PC)
 

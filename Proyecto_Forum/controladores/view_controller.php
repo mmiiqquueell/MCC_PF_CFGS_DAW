@@ -41,7 +41,9 @@ class controlador_vistas {
     	else{header("Location: vistas/indica.php&error1");}
     }
     
-    
+    /**
+     * Muestra la pantalla de login
+     */
     public function pantalla_login()
     {
     	$obtener_categorias = new modelo_vistas();
@@ -49,6 +51,9 @@ class controlador_vistas {
     	require_once ("vistas/login.php");
     }
     
+    /**
+     * Muestra la pantalla para crear un nuevo post
+     */
     public function mostrar_crear_tema()
     {
     	$obtener_categorias = new modelo_vistas();
@@ -56,6 +61,10 @@ class controlador_vistas {
     	require_once ("vistas/nuevoTema.php");
     }
     
+    
+    /**
+     * Muestra el editor de post
+     */
     public function mostrar_editar_tema()
     {
     	$idp = $_GET['idp'];
@@ -67,6 +76,10 @@ class controlador_vistas {
     	require_once ("vistas/editarP.php");
     }
     
+    
+    /**
+     * Muestra un mensaje que indica que la cuenta de usuario ha sido activada.
+     */
     public function mostrar_activado()
     {
     	$obtener_categorias = new modelo_vistas();
@@ -74,6 +87,9 @@ class controlador_vistas {
     	require_once ("vistas/activado.php");
     }
     
+    /**
+     * Muestra una pantalla que permite al usuario escribir su email para solicitar un email de activación de cuenta en caso de que pierda el email al registrarse.
+     */
     public function mostrar_reactivado()
     {
     	$obtener_categorias = new modelo_vistas();
@@ -82,7 +98,9 @@ class controlador_vistas {
     }
     
     
-    
+    /**
+     * Muestra la pantalla de registro
+     */
     public function registrar()
     {
     	$obtener_categorias= new modelo_vistas();
@@ -90,6 +108,9 @@ class controlador_vistas {
     	require_once ("vistas/registrar.php");
     }
 
+    /**
+     * Muestra el listado de subindice
+     */
     public function mostrar_subindice() 
     {
     	$idst = $_GET['idst'];
@@ -107,6 +128,9 @@ class controlador_vistas {
     	else{header("Location: vistas/subindice.php&error1");}
     }
     
+    /**
+     * Muestra un post y sus mensajes
+     */
     public function mostrar_tema()
     {
     	$idp = $_GET['idp'];
@@ -133,6 +157,10 @@ class controlador_vistas {
     	else{header("Location: vistas/tema.php&error1");}
     }
         
+    
+    /** 
+     * Muestra la pantalla para responder
+     */
     public function mostrar_responder()
     {
     	$idp = $_GET['idp'];
@@ -143,7 +171,9 @@ class controlador_vistas {
     	require_once ("vistas/responder.php");
     }
     
-    
+    /**
+     * Muestra la pantalla para editar una respuesta
+     */
     public function mostrar_editarR()
     {
     	$idp = $_GET['idp'];
@@ -157,6 +187,10 @@ class controlador_vistas {
     	require_once ("vistas/editarR.php");
     }
     
+    
+    /**
+     * Muestra la pantalla de perfil de usuario
+     */
     public function mostrar_perfil()
     {
     	$obtener_temas = new modelo_vistas();
@@ -168,9 +202,5 @@ class controlador_vistas {
     	$MSG = $obtener_temas -> contador_mensajes_totales();
     	if($temas && $preferencias && $MSG){require_once 'vistas/perfil.php';}
     	else{header("Location: vistas/perfil.php&error1");}
-    }
-    
-    
-    
-    
+    }    
 }

@@ -11,7 +11,7 @@ class modelo_usuario{
     public function __construct(){$this -> db = Conectar::conexion();}
     
     /**
-     * Getters y Setters.
+     * Getters y Setters. (Quizas hay demsaidos)
      */
     public function getNombre() {return $this -> nombre;}
     public function setNombre($nombre) {$this -> nombre = $nombre;}
@@ -58,6 +58,7 @@ class modelo_usuario{
     
     /**
      * Inserta un nuevo usuario a la base de datos.
+     * @return boolean
      */
     public function crear_usuario()
     {
@@ -71,6 +72,10 @@ class modelo_usuario{
     	else {return false;}
     }
     
+    /**
+     * Devuelve el ID del usuario
+     * @return integer
+     */
     public function get_user_id()
     {
     	$consulta=$this->db->query("SELECT id FROM usuarios WHERE nombre = '{$this->nombre}';");
@@ -78,6 +83,10 @@ class modelo_usuario{
     	return $this->id;
     }
     
+    /**
+     * Añade valores por defecto a la tabla "preferencias" tras crear un usuario
+     * @return boolean
+     */
     public function crear_usuario2()
     {
     	$sql="INSERT INTO preferencias (usuario,avatar,firma,tema,sexo,biografia,steam,playstation,xboxlive,nintendo,edad,mensajes,estilofecha,zonahoraria,paginaweb,ordenmensajes) VALUES ('{$this->id}','avatar_default.jpg',NULL,'Oficial','No mostrar',NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,NULL,'Ascendiente')";
@@ -111,8 +120,8 @@ class modelo_usuario{
     }
     
     /**
-     * 
-     * @return unknown
+     * Devuelve el valor del email al validar para saber si estava ya activo o no.
+     * @return string
      */
     public function get_mail2()
     {
@@ -123,6 +132,7 @@ class modelo_usuario{
         
     /**
      * Comprueba el nivel del usuario.
+     * @return integer
      */
     public function verificar_nivel()
     {
@@ -133,6 +143,7 @@ class modelo_usuario{
         
     /**
      * Función para hacer login.
+     * @return boolean
      */
     public function login()
     {
@@ -146,6 +157,10 @@ class modelo_usuario{
         else {return false;}
     }
     
+    /**
+     * Una vez validado el usuario se le cambia el nivel para indicar que está activo.
+     * @return boolean
+     */
     public function activar_cuenta()
     {
     	$sql = "UPDATE usuarios SET nivel = 11 WHERE validar = '{$this -> id}';";
@@ -154,6 +169,10 @@ class modelo_usuario{
     	else {return false;}
     }
     
+    /**
+     * Obtiene el nivel del usuario para saber si se ha activado o no con anterioridad
+     * @return integer
+     */
     public function verificar_activacion()
     {
     	$consulta=$this->db->query("SELECT nivel FROM usuarios WHERE validar = '{$this -> id}';");
@@ -161,6 +180,10 @@ class modelo_usuario{
     	return $this->nivel;
     }
     
+    /**
+     * Obtiene el ID unico generado al crear los usuarios para evitar repetir dicho código
+     * @return integer (Se utiliza el get/set ID para ahorrar código)
+     */
     public function check_key()
     {
     	$consulta=$this->db->query("SELECT validar FROM usuarios;");
@@ -168,6 +191,10 @@ class modelo_usuario{
     	return $this->id;
     }
     
+    /**
+     * Obtiene las preferencias del usuario
+     * @return array
+     */
     public function get_preferencias()
     {
     	$consulta=$this->db->query("SELECT * FROM preferencias WHERE usuario = '{$this->id}';");
@@ -175,6 +202,10 @@ class modelo_usuario{
     	return $this->preferencias;
     }
     
+    /**
+     * Actualiza las preferencias del usuario
+     * @return boolean
+     */
     public function actualizar_preferencias()
     {
     	$stmt = $this->db->prepare("UPDATE preferencias SET avatar = '".$_SESSION['user'].".jpg', firma = ?, tema = ?, sexo = ?, biografia = ?, steam = ?, playstation = ?, xboxlive = ?, nintendo = ?, edad = ?, mensajes = ?, estilofecha = ?, zonahoraria = ?, paginaweb = ?, ordenmensajes = ? WHERE usuario = '".$_SESSION['uid']."' ;");

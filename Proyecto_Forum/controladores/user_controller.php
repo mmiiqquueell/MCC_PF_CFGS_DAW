@@ -23,7 +23,7 @@ class controlador_usuario
 		$nuevo_usuario = new modelo_usuario();
 		$key = $nuevo_usuario -> check_key();
 		
-		for ($i = 0; $i < count($key); $i++){
+		for ($i = 0; $i < count($key); $i++){ // Genera un ID unico y comprueba si existe en la base de datos, si existe se volvera a generar otro ID.
 			$cifrado = uniqid();
 			if($cifrado == $key[$i]['validar']) {$cifrado = uniqid();}
 			else {break;}
@@ -51,7 +51,7 @@ class controlador_usuario
 			$id_user = $nuevo_usuario -> get_user_id();
 			$nuevo_usuario -> setId($id_user['id']);
 			$error2 = $nuevo_usuario -> crear_usuario2();
-			if (!$error) {
+			if (!$error) { // Si el crear usuario es totalmente correcto se envia un mail al usuario para validar la cuenta.
 				$para      = $email1;
 				$titulo    = 'Activación de cuenta RGF';
 				$mensaje   = 'Su cuenta ha sido creada pero para activarla debe pulsar en este link:' . "\r\n" . "http://www.mcc-daw.tk/index.php?controller=usuario&action=activar&cd=".$cifrado;
@@ -67,7 +67,7 @@ class controlador_usuario
 	
 	
 	/**
-	 * 
+	 * Permite al usuario iniciar sesión siempre y cuando cumpla los requisitos.
 	 */
 	public function login()
 	{
@@ -95,7 +95,9 @@ class controlador_usuario
 		
 	}
 	
-	
+	/**
+	 * Cierra la sesión del usuario.
+	 */
 	public function cerrar()
 	{
 		session_unset();
@@ -103,6 +105,9 @@ class controlador_usuario
 		header("Location: index.php");
 	}
 	
+	/**
+	 * Valdia de cuenta de usuario y permite utilizarla
+	 */
 	public function activar_cuenta() 
 	{
 		$cod = $_GET['cd']; 
@@ -121,7 +126,9 @@ class controlador_usuario
 		}
 	}
 	
-	
+	/**
+	 * Si el usuario pierde el email de activación puede volver a solicitar otro email.
+	 */
 	public function reenviar_mail()
 	{
 		$mail = $_POST['mail'];
@@ -146,6 +153,9 @@ class controlador_usuario
 		}
 	}
 	
+	/** 
+	 * Guarda las preferencias del usuario
+	 */
 	public function guardar_config()
 	{
 		$obtener_temas = new modelo_vistas();

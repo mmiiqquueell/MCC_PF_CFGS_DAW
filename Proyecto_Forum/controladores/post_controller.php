@@ -9,7 +9,9 @@ require_once("modelos/post_model.php");
 
 class controlador_post 
 {
-   
+   /**
+    * Función que permite añadir comentarios a los POST y devuelve al usuario al mensaje que ha escrito.
+    */
 	public function comentar()
 	{
 		$uid = $_SESSION['uid'];
@@ -28,6 +30,9 @@ class controlador_post
 		else{echo "Se ha producido un error al añadir el comentario, por favor, intentelo más tarde.";}
 	}
 	
+	/**
+	 * Función que permite editar mensajes
+	 */
 	public function editarMensaje()
 	{
 		$uid = $_SESSION['uid'];
@@ -44,6 +49,9 @@ class controlador_post
 		else{echo "Se ha producido un error al editar el comentario, por favor, intentelo más tarde.";}
 	}
 	
+	/**
+	 * Función que permite crear post
+	 */
 	public function crear_post()
 	{
 		$idst = $_POST['idst'];
@@ -62,6 +70,9 @@ class controlador_post
 		else{echo "Se ha producido un error al crear el tema, por favor, intentelo más tarde.";}
 	}
 	
+	/**
+	 * Función que permite editar los post
+	 */
 	public function editar_post()
 	{
 		$idst = $_POST['idst'];
@@ -82,6 +93,9 @@ class controlador_post
 		else{echo "Se ha producido un error al editar el tema, por favor, intentelo más tarde.";}
 	}
 	
+	/**
+	 * Función que permite borrar un post si no tiene comentarios
+	 */
 	public function borrar_post()
 	{
 		$idp = $_GET['idp'];
@@ -92,7 +106,9 @@ class controlador_post
 		else {echo "Se ha producido un error al intentar borrar el tema, por favor, intentelo más tarde.";}
 	}
 	
-	
+	/**
+	 * Función que borra el mensaje y lo bloquea de forma permanente
+	 */
 	public function borrar_mensaje()
 	{
 		$uid = $_SESSION['uid'];
@@ -109,6 +125,9 @@ class controlador_post
 		else{echo "Se ha producido un error al editar el comentario, por favor, intentelo más tarde.";}
 	}
 	
+	/**
+	 * Solo administradores: Función que permite cerrar un post.
+	 */
 	public function cerrar_tema()
 	{
 		$idp = $_GET['idp'];
@@ -119,6 +138,9 @@ class controlador_post
 		else {echo "Se ha producido un error al intentar borrar el tema, por favor, intentelo más tarde.";}
 	}
 	
+	/**
+	 * Solo administradores: Función que permite anclar un post.
+	 */
 	public function add_del_pin()
 	{
 		$idp = $_GET['idp'];

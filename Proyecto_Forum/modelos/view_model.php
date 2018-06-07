@@ -77,7 +77,10 @@ class modelo_vistas{
     	return $this->subtemas;
     }    
     
-    
+    /**
+     * Obtiene la cantidad de post que existen en total
+     * @return array
+     */
     public function contador_post()
     {
     	$consulta=$this->db->query("SELECT * FROM post;");
@@ -85,6 +88,10 @@ class modelo_vistas{
     	return $this->contapost;
     }
     
+    /**
+     * Obtiene el total de mensajes que existen
+     * @return array
+     */
     public function contador_mensajes_totales()
     {
     	$consulta=$this->db->query("SELECT * FROM mensajes;");
@@ -92,6 +99,10 @@ class modelo_vistas{
     	return $this->msgt;
     }
     
+    /**
+     * Obtiene todos los post segun la subcategoria a la que pertenecen
+     * @return array
+     */
     public function mostrar_posts()
     {
     	$consulta=$this->db->query("SELECT * FROM post WHERE subtema = '{$this->idst}' ORDER BY pin DESC, ultima_fecha DESC;");
@@ -99,6 +110,10 @@ class modelo_vistas{
     	return $this->subtemas;
     }
     
+    /**
+     * Obtiene todos los subtemas
+     * @return array
+     */
     public function listar_subtema()
     {
     	$consulta=$this->db->query("SELECT * FROM subtemas WHERE id = '{$this->idst}';");
@@ -106,6 +121,10 @@ class modelo_vistas{
     	return $this->subtema;
     } 
     
+    /**
+     * Obtiene todos los valores de los usuarios (Quizas esto no deberia estar aqui)
+     * @return array
+     */
     public function get_user()
     {
     	$consulta=$this->db->query("SELECT * FROM usuarios;");
@@ -113,6 +132,10 @@ class modelo_vistas{
     	return $this->users;
     }
     
+    /**
+     * Devuelve la lista de post segun su id
+     * @return array
+     */
     public function mostrar_post()
     {
     	$consulta=$this->db->query("SELECT * FROM post WHERE id = '{$this->idp}';");
@@ -120,6 +143,10 @@ class modelo_vistas{
     	return $this->post;
     }
     
+    /**
+     * Obtiene todos los datos del mensaje indicado
+     * @return array
+     */
     public function mostrar_editarR()
     {
     	$consulta=$this->db->query("SELECT * FROM mensajes WHERE id = '{$this->id}';");
@@ -127,6 +154,10 @@ class modelo_vistas{
     	return $this->msg;
     }
     
+    /**
+     * Obtiene todos los valores de todos los mensajes
+     * @return array
+     */
     public function mostrar_mensajes()
     {
     	$consulta=$this->db->query("SELECT * FROM mensajes;");
@@ -134,6 +165,10 @@ class modelo_vistas{
     	return $this->msg;
     }
     
+    /**
+     * Devuelve todos los valores de la tabla preferencias
+     * @return array
+     */
     public function mostrar_preferencias()
     {
     	$consulta=$this->db->query("SELECT * FROM preferencias;");

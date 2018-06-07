@@ -16,17 +16,15 @@
                 else {filtro.style.transition = "1s"; filtro.style.opacity = "0.2"; activo = true;}
             }	
 
-
-            setTimeout(function(){alert("¡ATENCIÓN!: \n\nEsta página está en desarrollo por lo que es posible que se pierdan todos los datos de vez en cuando." +
-        			"\n\n\n ACTUALIZADO: 03/06/2018\n\n " +
-        			"v0.6.0.4: " +
-        			"\n- Añadido perfil de usuario (solo visible para cada usuario el suyo propio). " +
-        			"\n- Puedes editar el perfil en todos los aspectos salvo cambiar contraseña o establecer formato de fecha aunque solo funciona la firma y avatar realmente. " +
-        			"\n- Puedes subir un avatar en JPG unicamente sin limitadores aunque el servidor si que tiene un limitador por defecto. " +
-        			"\n\n\n"
-
-
-        			);},1000);
+            setTimeout(function(){alert(
+            	"¡ATENCIÓN!: \n\nEsta página está en desarrollo por lo que es posible que se pierdan todos los datos de vez en cuando." +
+        		"\n\n\n ACTUALIZADO: 07/06/2018\n\n " +
+        		"v0.6.0.5: " +
+        		"\n- Añadido perfil de usuario (solo visible para cada usuario el suyo propio). " +
+        		"\n- Puedes editar el perfil en todos los aspectos salvo cambiar contraseña o establecer formato de fecha aunque solo funciona la firma y avatar realmente. " +
+        		"\n- Puedes subir un avatar en JPG unicamente sin limitadores aunque el servidor si que tiene un limitador por defecto. " +
+        		"\n\n\n"
+        	);},1000);
 		}
 	</script>
     <body class="container p-0">

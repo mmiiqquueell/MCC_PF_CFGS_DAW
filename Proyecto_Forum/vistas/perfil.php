@@ -17,7 +17,7 @@
             }	
 		}
 
-		function remove_pill(){
+		function remove_pill(){ // Se utiliza un unico formulario para guardar las preferencias de manera que para que funcione es necesario eliminar esta etiqueta llamada DATA-TOGLE
 			$('.borrame').removeAttr("data-toggle");
 		}
 	</script>
